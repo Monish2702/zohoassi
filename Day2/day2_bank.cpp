@@ -1,23 +1,15 @@
 #include<iostream>
 #include<string>
 #include<vector>
+#include<stdarg.h>
 using namespace std;
 class compare; //forward declaration
 //Base classes bank,loan
-class bank{public:
+class bankDetails{public:
     string bankName,establishedDate,bankType;
-    void getName(){
-        cout<<"Enter the name of the bank: ";
-        getline(cin,bankName);cout<<endl;
-    }
-    void getEstablishedDate(){
-        cout<<"Enter the established date of the bank: ";
-        getline(cin,establishedDate); cout<<endl;
-    }
-    void getBankType(){
-        cout<<"Enter the type of the bank: ";
-        getline(cin,bankType); cout<<endl;
-    }
+    virtual string getName()=0;
+    virtual string getEstablishedDate()=0;
+    virtual string getBankType()=0;
     void getInfo(){
         cout<<endl<<"Bank Name: "<<bankName<<endl;
         cout<<"Established Date: "<<establishedDate<<endl;
@@ -29,99 +21,104 @@ class loan{public:
     string loanType,docsrequired;
     float interestRate;
     // friend class compare; //friend class
-    void getLoanType(){
-        cout<<"Enter the Types of the loan available: ";
-        getline(cin, loanType);
-    }
-    void getDocsRequired(){
-        cout<<"Enter the docs required for the loan: ";
-        getline(cin, docsrequired);
-    }
-    void getInterestRate(){
+    string getLoanType(){ return loanType;}
+    string getDocsRequired(){ return docsrequired;}
+    float getInterestRate(){ return interestRate;}
+};
+
+//---------------------------------------------------------------------------------------------------------------------
+class BANK:public bankDetails,public loan{public:
+
+    friend class compare;
+    BANK () {
+        
+        cout<<"Enter the name of the bank: ";
+        cin>>bankName; cout<<endl;
+
+        // cout<<"Enter the established date of the bank: ";
+        // cin>>establishedDate; cout<<endl;
+
+        // cout<<"Enter the type of the bank: ";
+        // cin>>bankType; cout<<endl;
+        
+        // cout<<"Enter the Types of the loan available: ";
+        // cin>>loanType;
+
+        // cout<<"Enter the docs required for the loan: ";
+        // cin>>docsrequired;
+
         cout<<"Enter the interest rate of the loan: ";
         cin>>interestRate;
     }
-};
 
-//---------------------------------------------------------------------------------------------------------------------
-class HDFC:public bank,public loan{public:
-    void getName(){
-        bank::getName();
+    string getName(){
+        return bankName;
     }
-    void getEstablishedDate(){
-        bank::getEstablishedDate();
-    }
-    void getBankType(){
-        bank::getBankType();
-    }
-    void getInfo(){
-        bank::getInfo();
-    }
-}; 
-//---------------------------------------------------------------------------------------------------------------------
-class SBI:public bank,public loan{public:
-    void getName(){
-        bank::getName();
-    }
-    void getEstablishedDate(){
-        bank::getEstablishedDate();
-    }
-    void getBankType(){
-        bank::getBankType();
-    }
-    void getInfo(){
-        bank::getInfo();
-    }
-};
-//---------------------------------------------------------------------------------------------------------------------
+    string getEstablishedDate(){
+        return establishedDate;
 
-class ICICI:public bank,public loan{public:
-    void getName(){
-        bank::getName();
     }
-    void getEstablishedDate(){
-        bank::getEstablishedDate();
+    string getBankType(){
+        return bankType;
     }
-    void getBankType(){
-        bank::getBankType();
-    } 
-    void getInfo(){
-        bank::getInfo();
-    }
-};
-//---------------------------------------------------------------------------------------------------------------------
-
-class IOB:public bank,public loan{public:
-    void getName(){
-        bank::getName();
-    }
-    void getEstablishedDate(){
-        bank::getEstablishedDate();
-    }
-    void getBankType(){
-        bank::getBankType();
-    } 
-    void getInfo(){
-        bank::getInfo();
-    }
-};
+    };
 //-----------------------------------------------------------------------------------------------------------------------------
 
-class compare{public:
+class broker{public:
 
-    //compare interest Rates of different banks
-    void compareInterestRate(HDFC h,SBI s,ICICI i,IOB o){
-        if(h.interestRate>s.interestRate&&h.interestRate>i.interestRate&&h.interestRate>o.interestRate){
-            cout<<"HDFC has the highest interest rate"<<endl;
+    //compare interest Rates using operator overloading
+    void compareInterestRate (BANK a[],int n){
+        float min=a[0].interestRate;
+        int index=0;
+        for(int i=0;i<n;i++){
+            if(a[i].interestRate<min){
+                min=a[i].interestRate;
+                index=i;
+            }
         }
-        else if(s.interestRate>h.interestRate&&s.interestRate>i.interestRate&&s.interestRate>o.interestRate){
-            cout<<"SBI has the highest interest rate"<<endl;
-        }
-        else if(i.interestRate>h.interestRate&&i.interestRate>s.interestRate&&i.interestRate>o.interestRate){
-            cout<<"ICICI has the highest interest rate"<<endl;
-        }
-        else if(o.interestRate>h.interestRate&&o.interestRate>s.interestRate&&o.interestRate>i.interestRate){
-            cout<<"IOB has the highest interest rate"<<endl;
-        }
+        cout<<"The bank with the highest interest rate is: "<<a[index].bankName<<endl;
+        cout<<"The interest rate is: "<<min<<endl;
+    }
+    void compareInterestRate(BANK b1,BANK b2){
+        b1.interestRate<b2.interestRate? cout<<"Bank with Lowest interest is: "<<b1.bankName<<endl : 
+                     cout<<"Bank with Lowest interest is: "<<b2.bankName<<endl;
+    }   
+    void compareInterestRate(BANK b1,BANK b2,BANK b3){
+        b1.interestRate<b2.interestRate?cout<<"Bank with Lowest interest is: "<<b1.bankName<<endl : 
+                                        b2.interestRate<b3.interestRate?cout<<"Bank with Lowest interest is: "<<b2.bankName<<endl: 
+                                                        cout<<"Bank with Lowest interest is: "<<b3.bankName<<endl;
     }
 };
+
+//-----------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------
+
+
+
+int main(){
+    int n; 
+    cout<<"Enter No of banks : "; 
+    cin>>n;
+    BANK* b = new BANK[n];
+    for(int i=0;i!=n;i++) {
+        cout<<endl;
+        cout<<b[i].getName(); cout<<endl;
+        // cout<<b[i].getEstablishedDate();cout<<endl;
+        // cout<<b[i].getBankType();cout<<endl;
+        // cout<<b[i].getLoanType();cout<<endl;
+        cout<<b[i].getInterestRate();cout<<endl;
+        // cout<<b[i].getDocsRequired();cout<<endl;
+        // b[i]->getInfo();cout<<endl;
+        cout<<'\n';
+    }
+    broker c;
+    if(n>2){
+    cout<<"\nComparing two banks:\n ";
+    c.compareInterestRate(b[0],b[1]);
+    cout<<"\nComparing three banks:\n ";
+    c.compareInterestRate(b[0],b[1],b[2]);
+    }
+    cout<<"\n This can compare n banks:\n ";
+    c.compareInterestRate(b,n); //multiple banks comparison
+    return 0;
+}
