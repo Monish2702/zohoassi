@@ -1,0 +1,38 @@
+PS C:\Users\Kumar ASUS\Desktop\Zoho documents Monish\ZOHO_intern\Day1> g++ day1_vehicle.cpp
+PS C:\Users\Kumar ASUS\Desktop\Zoho documents Monish\ZOHO_intern\Day1> ./a.exe
+For car 1: Enter no of wheels in your car: 
+4
+No of wheels in your car: 4
+For car 2: Enter no of wheels in your car: 
+4
+No of wheels in your car: 4
+Is c1<c2?: 1
+For bike: Enter no of wheels in your bike: 
+2
+No of wheels in your bike: 2
+
+------------------------------------------
+Vehicle type: car
+Brand: honda
+Model: civic
+Color: red
+Mileage: 25
+Price: 12000
+
+
+------------------------------------------
+Vehicle type: car
+Brand: honda
+Model: city
+Color: black
+Mileage: 23.4
+Price: 15000
+
+
+------------------------------------------
+Vehicle type: bike
+Brand: hero honda
+Model: splender
+Color: blue
+Mileage: 50.2
+Price: 12000
