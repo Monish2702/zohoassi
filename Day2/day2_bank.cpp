@@ -1,19 +1,20 @@
 #include<iostream>
 #include<string>
 #include<vector>
-#include<stdarg.h>
 using namespace std;
 class compare; //forward declaration
 //Base classes bank,loan
 class bankDetails{public:
-    string bankName,establishedDate,bankType;
+    string bankName,establishedDate,bankType,branch;
     virtual string getName()=0;
     virtual string getEstablishedDate()=0;
     virtual string getBankType()=0;
+    virtual string getBranch()=0;
     void getInfo(){
         cout<<endl<<"Bank Name: "<<bankName<<endl;
         cout<<"Established Date: "<<establishedDate<<endl;
         cout<<"Bank Type: "<<bankType<<endl<<endl;
+        cout<<"Bank Branch: "<<branch<<endl;
     }
 };
 
@@ -42,10 +43,13 @@ class BANK:public bankDetails,public loan{public:
         // cin>>bankType; cout<<endl;
         
         // cout<<"Enter the Types of the loan available: ";
-        // cin>>loanType;
+        // cin>>loanType; cout<<endl;
 
         // cout<<"Enter the docs required for the loan: ";
-        // cin>>docsrequired;
+        // cin>>docsrequired; cout<<endl;
+
+        // cout<<"Enter the bank branch: ";
+        // cin>>branch; cout<<endl;
 
         cout<<"Enter the interest rate of the loan: ";
         cin>>interestRate;
@@ -61,7 +65,10 @@ class BANK:public bankDetails,public loan{public:
     string getBankType(){
         return bankType;
     }
-    };
+    string getBranch(){
+        return branch;
+    }
+};
 //-----------------------------------------------------------------------------------------------------------------------------
 
 class broker{public:
@@ -92,7 +99,6 @@ class broker{public:
 
 //-----------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------------------------------
-
 
 
 int main(){
