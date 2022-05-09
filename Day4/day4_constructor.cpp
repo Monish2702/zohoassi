@@ -52,7 +52,7 @@ public:// private:
     }
     ~rectangle() {
         delete left,top,width,height,area;
-        cout<<"\nDestructor called"<<endl;;
+        cout<<"\nDestructor called "<<endl;
     }
 };
 
@@ -75,5 +75,4 @@ int main() {
     cout<<"\n ------------------------ \n Copy constructor-2\n ------------------------ \n"<<endl;
     r5.print();
     return 0;
-
 }
