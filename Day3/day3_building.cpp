@@ -3,7 +3,7 @@ using namespace std;
 int n,m,sum;
 
 bool doesExist_valid(int x,int y,int **arr,bool **vis){
-    if(x<0||x>=n||y<0||y>=m||arr[x][y]==0) //doesnt exist and not zero
+    if(x<0||x>=n||y<0||y>=m||arr[x][y]==0) //doesn't exist and not zero
         return false;
     if(vis[x][y]==true) //already visited
         return false;
@@ -67,6 +67,7 @@ int main(){
             }
         }
     }
+    
 
 
     //Deallocate
