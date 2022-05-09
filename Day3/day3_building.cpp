@@ -36,7 +36,7 @@ int main(){
     cin>>m;
     cout<<"Enter the y coordinate length: ";
     cin>>n;
-
+    int max=0;
     //Allocating 2d array of size m*n
     int** arr = new int*[m];
     bool **visited =new bool*[m];
@@ -67,9 +67,12 @@ int main(){
             }
         }
     }
-    
-
-
+    for(int i=0;i<m;i++){
+        for(int j=0;j<n;j++){
+            max=max>grouper[i][j]?max:grouper[i][j];
+        }
+    }
+    cout<<"\nThe max sum is: "<<max;
     //Deallocate
     for(int i=0;i<m;i++){
         delete [] arr[i];
