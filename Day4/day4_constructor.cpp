@@ -43,11 +43,6 @@ public:// private:
         height = new int(* r.height);
         area = new int(*width * *height);
     }
-    // void Area(){
-    //     *area = *width * *height;
-    //     area = new int(*width * *height);
-        
-    // }
     void print(){
     cout<<" 1) Left:: address   : "<<left<<"  value: "<<*left;
     cout<<"\n 2) Top:: address    : "<<top<<"  value: "<<*top;
