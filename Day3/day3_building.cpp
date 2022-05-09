@@ -72,7 +72,7 @@ int main(){
             max=max>grouper[i][j]?max:grouper[i][j];
         }
     }
-    cout<<"\nThe max sum is: "<<max;
+    cout<<"\nThe leader group is: "<<max;
     //Deallocate
     for(int i=0;i<m;i++){
         delete [] arr[i];
