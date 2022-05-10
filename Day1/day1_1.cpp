@@ -1,4 +1,4 @@
-//Passenger details
+//Passenger details:
 #include<iostream>
 #include<string>
 using namespace std;
