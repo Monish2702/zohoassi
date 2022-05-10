@@ -97,7 +97,7 @@ class broker{public:
         cout<<"The bank with the lowest interest rate is: "<<a[index].bankName<<endl;
         cout<<"The interest rate is: "<<min<<endl;
     }
-    //pritn all details of the bank
+    //print all details of the bank
     void printSinglebankdata(BANK a){
         cout<<"\nBank Name: "<<a.bankName<<endl;
         cout<<"Established Date: "<<a.establishedDate<<endl;
