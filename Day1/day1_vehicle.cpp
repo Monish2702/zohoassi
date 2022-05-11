@@ -10,7 +10,7 @@ enum vehicle_type
 };
 
 // Base class vehicle
-class vehicle
+class Vehicle
 {
 public:
     vehicle_type type;
@@ -18,7 +18,7 @@ public:
     int no_of_wheels;
     float mileage, price;
     // Base class constructor
-    vehicle(vehicle_type type, string brand, string model, string color, float mileage, float price)
+    Vehicle(vehicle_type type, string brand, string model, string color, float mileage, float price)
     {
         this->type = type;
         this->brand = brand;
@@ -28,18 +28,18 @@ public:
         this->price = price;
     }
     // operator overloading
-    friend bool operator<(const vehicle &v1, const vehicle &v2);
+    friend bool operator<(const Vehicle &v1, const Vehicle &v2);
     //  bool operator< (const vehicle& v1){    // overloading operator < without friend
     //     return this->price < v1.price;
     // }
-    friend ostream &operator<<(ostream &print, const vehicle &v);
+    friend ostream &operator<<(ostream &print, const Vehicle &v);
     virtual void get_no_wheels() = 0;
 };
-bool operator<(const vehicle &v1, const vehicle &v2)
+bool operator<(const Vehicle &v1, const Vehicle &v2)
 { // friend funcction to comapre prices
     return v1.price < v2.price;
 }
-ostream &operator<<(ostream &print, const vehicle &v)
+ostream &operator<<(ostream &print, const Vehicle &v)
 { // friend function to print vehicle details
     print << "Vehicle type: " << v.type << endl;
     print << "Brand: " << v.brand << endl;
@@ -51,13 +51,13 @@ ostream &operator<<(ostream &print, const vehicle &v)
 }
 //---------------------------------------------------------------------------------------------------------------------------------
 // Derived class-1 Car
-class car : public vehicle
+class Car : public Vehicle
 {
 public:
     int no_of_persons;
     string car_type;
     // Derived class-1 constructor
-    car(vehicle_type type, string brand, string model, string color, float mileage, float price, int no_of_persons, string car_type) : vehicle(type, brand, model, color, mileage, price)
+    Car(vehicle_type type, string brand, string model, string color, float mileage, float price, int no_of_persons, string car_type) : Vehicle(type, brand, model, color, mileage, price)
     {
         this->no_of_persons = no_of_persons;
         this->car_type = car_type;
@@ -72,13 +72,13 @@ public:
 
 //---------------------------------------------------------------------------------------------------------------------------------
 // Derived class-2 Bike
-class bike : public vehicle
+class Bike : public Vehicle
 {
 public:
     float weight;
     string bike_type;
     // Derived class-2 constructor
-    bike(vehicle_type type, string brand, string model, string color, float mileage, float price, float weight, string bike_type) : vehicle(type, brand, model, color, mileage, price)
+    Bike(vehicle_type type, string brand, string model, string color, float mileage, float price, float weight, string bike_type) : Vehicle(type, brand, model, color, mileage, price)
     {
         this->weight = weight;
         this->bike_type = bike_type;
@@ -95,15 +95,15 @@ public:
 int main()
 {
     cout << "\nVehicle_type: 0-petrol 1-diesel 2-electric 3-hybrid\n";
-    car c1(hybrid, "honda", "civic", "red", 25, 12000.8f, 4, "sedan");
+    Car c1(hybrid, "honda", "civic", "red", 25, 12000.8f, 4, "sedan");
     cout << "For car 1: ";
     c1.get_no_wheels();
-    car c2(diesel, "honda", "city", "black", 23.4, 15000.5f, 4, "sedan");
+    Car c2(diesel, "honda", "city", "black", 23.4, 15000.5f, 4, "sedan");
     cout << "For car 2: ";
     c2.get_no_wheels();
     int c = c1 < c2;
     cout << "Is c1<c2?: " << c << endl;
-    bike b(petrol, "hero honda", "splender", "blue", 50.2, 12000.4f, 100, "mountain");
+    Bike b(petrol, "hero honda", "splender", "blue", 50.2, 12000.4f, 100, "mountain");
     cout << "For bike: ";
     b.get_no_wheels();
     cout << endl
