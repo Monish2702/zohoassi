@@ -10,7 +10,7 @@ bool doesExist_valid(int x,int y,int **arr,bool **vis){
     return true;
 }
 
-//To move up, right, down, left while performing DFS
+//To move left, up, right, down while performing DFS
 int temp_x[]={-1,0,1,0};
 int temp_y[]={0,1,0,-1};
 
@@ -32,15 +32,15 @@ void dfs(int x,int y,int **arr,bool **vis){
 
 //Main function
 int main(){
-    cout<<"Enter the x coordinate length: ";
+    cout<<"Enter the x (m) coordinate length: ";
     cin>>m;
-    cout<<"Enter the y coordinate length: ";
+    cout<<"Enter the y (n) coordinate length: ";
     cin>>n;
     int max=0;
     //Allocating 2d array of size m*n
     int** arr = new int*[m];
     bool **visited =new bool*[m];
-    int** grouper = new int*[m];
+    int** grouper = new int*[m];  //max possible group size is size of arr i.e m*n
     for(int i=0;i<m;i++){
         arr[i] = new int[n];
         visited[i] = new bool[n];
@@ -56,7 +56,7 @@ int main(){
         }
     }
     //calling dfs
-    cout<<"\nThe fromed groups sum are: ";
+    cout<<"\nThe formed groups sum are: ";
     for(int i=0;i<m;i++){
         for(int j=0;j<n;j++){
             sum=0;
@@ -73,9 +73,12 @@ int main(){
         }
     }
     cout<<"\nThe leader group is: "<<max;
+    
     //Deallocate
     for(int i=0;i<m;i++){
         delete [] arr[i];
-    } delete [] arr;
+        delete [] visited[i];
+        delete [] grouper[i];
+    } delete [] arr; delete [] visited; delete [] grouper;
     return 0;
 }
