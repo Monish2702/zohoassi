@@ -1,19 +1,26 @@
 #include <iostream>
 #include <string>
 using namespace std;
+enum vehicle_type
+{
+    petrol,
+    diesel,
+    electric,
+    hybrid
+};
 
 // Base class vehicle
 class vehicle
 {
 public:
-    string vehicle_type, brand, model, color;
+    vehicle_type type;
+    string brand, model, color;
     int no_of_wheels;
-    float mileage;
-    double price;
+    float mileage, price;
     // Base class constructor
-    vehicle(string vehicle_type, string brand, string model, string color, float mileage, double price)
+    vehicle(vehicle_type type, string brand, string model, string color, float mileage, float price)
     {
-        this->vehicle_type = vehicle_type;
+        this->type = type;
         this->brand = brand;
         this->model = model;
         this->color = color;
@@ -34,7 +41,7 @@ bool operator<(const vehicle &v1, const vehicle &v2)
 }
 ostream &operator<<(ostream &print, const vehicle &v)
 { // friend function to print vehicle details
-    print << "Vehicle type: " << v.vehicle_type << endl;
+    print << "Vehicle type: " << v.type << endl;
     print << "Brand: " << v.brand << endl;
     print << "Model: " << v.model << endl;
     print << "Color: " << v.color << endl;
@@ -50,7 +57,7 @@ public:
     int no_of_persons;
     string car_type;
     // Derived class-1 constructor
-    car(string vehicle_type, string brand, string model, string color, float mileage, double price, int no_of_persons, string car_type) : vehicle(vehicle_type, brand, model, color, mileage, price)
+    car(vehicle_type type, string brand, string model, string color, float mileage, float price, int no_of_persons, string car_type) : vehicle(type, brand, model, color, mileage, price)
     {
         this->no_of_persons = no_of_persons;
         this->car_type = car_type;
@@ -71,7 +78,7 @@ public:
     float weight;
     string bike_type;
     // Derived class-2 constructor
-    bike(string vehicle_type, string brand, string model, string color, float mileage, double price, float weight, string bike_type) : vehicle(vehicle_type, brand, model, color, mileage, price)
+    bike(vehicle_type type, string brand, string model, string color, float mileage, float price, float weight, string bike_type) : vehicle(type, brand, model, color, mileage, price)
     {
         this->weight = weight;
         this->bike_type = bike_type;
@@ -87,15 +94,16 @@ public:
 //---------------------------------------------------------------------------------------------------------------------------------
 int main()
 {
-    car c1("car", "honda", "civic", "red", 25, 12000, 4, "sedan");
+    cout << "\nVehicle_type: 0-petrol 1-diesel 2-electric 3-hybrid\n";
+    car c1(hybrid, "honda", "civic", "red", 25, 12000.8f, 4, "sedan");
     cout << "For car 1: ";
     c1.get_no_wheels();
-    car c2("car", "honda", "city", "black", 23.4, 15000, 4, "sedan");
+    car c2(diesel, "honda", "city", "black", 23.4, 15000.5f, 4, "sedan");
     cout << "For car 2: ";
     c2.get_no_wheels();
     int c = c1 < c2;
     cout << "Is c1<c2?: " << c << endl;
-    bike b("bike", "hero honda", "splender", "blue", 50.2, 12000, 100, "mountain");
+    bike b(petrol, "hero honda", "splender", "blue", 50.2, 12000.4f, 100, "mountain");
     cout << "For bike: ";
     b.get_no_wheels();
     cout << endl
