@@ -7,10 +7,11 @@ class Broker; // forward declaration
 class BankDetails
 {
 public:
-    string bank_name, established_date, bank_type, branch;
+    string bank_name, established_date, branch;
+    bool bank_type;
     virtual string getName() = 0;
     virtual string getEstablishedDate() = 0;
-    virtual string getBankType() = 0;
+    virtual bool getBankType() = 0;
     virtual string getBranch() = 0;
     void getInfo()
     {
@@ -79,7 +80,7 @@ public:
     {
         return established_date;
     }
-    string getBankType()
+    bool getBankType()
     {
         return bank_type;
     }
