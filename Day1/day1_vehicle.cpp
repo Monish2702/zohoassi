@@ -33,7 +33,7 @@ public:
     //     return this->price < v1.price;
     // }
     friend ostream &operator<<(ostream &print, const Vehicle &v);
-    virtual void get_no_wheels() = 0;
+    virtual void get_no_of_wheels() = 0;
 };
 bool operator<(const Vehicle &v1, const Vehicle &v2)
 { // friend funcction to comapre prices
@@ -62,7 +62,7 @@ public:
         this->no_of_persons = no_of_persons;
         this->car_type = car_type;
     }
-    void get_no_wheels()
+    void get_no_of_wheels()
     {
         cout << "Enter no of wheels in your car: " << endl;
         cin >> no_of_wheels;
@@ -83,7 +83,7 @@ public:
         this->weight = weight;
         this->bike_type = bike_type;
     }
-    void get_no_wheels()
+    void get_no_of_wheels()
     {
         cout << "Enter no of wheels in your bike: " << endl;
         cin >> no_of_wheels;
@@ -97,15 +97,15 @@ int main()
     cout << "\nVehicle_type: 0-petrol 1-diesel 2-electric 3-hybrid\n";
     Car c1(hybrid, "honda", "civic", "red", 25, 12000.8f, 4, "sedan");
     cout << "For car 1: ";
-    c1.get_no_wheels();
+    c1.get_no_of_wheels();
     Car c2(diesel, "honda", "city", "black", 23.4, 15000.5f, 4, "sedan");
     cout << "For car 2: ";
-    c2.get_no_wheels();
+    c2.get_no_of_wheels();
     int c = c1 < c2;
     cout << "Is c1<c2?: " << c << endl;
     Bike b(petrol, "hero honda", "splender", "blue", 50.2, 12000.4f, 100, "mountain");
     cout << "For bike: ";
-    b.get_no_wheels();
+    b.get_no_of_wheels();
     cout << endl
          << "------------------------------------------" << endl;
     cout << c1 << endl;
