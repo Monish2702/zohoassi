@@ -8,7 +8,7 @@ class BankDetails
 {
 public:
     string bank_name, established_date, branch;
-    bool bank_type;
+    bool is_private;
     virtual string getName() = 0;
     virtual string getEstablishedDate() = 0;
     virtual bool getBankType() = 0;
@@ -18,7 +18,7 @@ public:
         cout << endl
              << "Bank Name: " << bank_name << endl;
         cout << "Established Date: " << established_date << endl;
-        cout << "Bank Type: " << bank_type << endl
+        cout << "Bank Type: " << is_private << endl
              << endl;
         cout << "Bank Branch: " << branch << endl;
     }
@@ -51,8 +51,8 @@ public:
         cin >> established_date;
         cout << endl;
 
-        cout << "Enter the type of the bank: ";
-        cin >> bank_type;
+        cout << "Enter the type of the bank (0 if public, 1 if private): ";
+        cin >> is_private;
         cout << endl;
 
         cout << "Enter the Types of the loan available: ";
@@ -82,7 +82,7 @@ public:
     }
     bool getBankType()
     {
-        return bank_type;
+        return is_private;
     }
     string getBranch()
     {
@@ -127,7 +127,7 @@ public:
     {
         cout << "\nBank Name: " << a.bank_name << endl;
         cout << "Established Date: " << a.established_date << endl;
-        cout << "Bank Type: " << a.bank_type << endl;
+        cout << "Bank Type: " << a.is_private << endl;
         cout << "Bank Branch: " << a.branch << endl;
         cout << "Loan Type: " << a.loan_type << endl;
         cout << "Docs Required: " << a.docs_required << endl;
@@ -140,7 +140,7 @@ public:
         {
             cout << "\nBank Name: " << a[i].bank_name << endl;
             cout << "Established Date: " << a[i].established_date << endl;
-            cout << "Bank Type: " << a[i].bank_type << endl;
+            cout << "Bank Type: " << a[i].is_private << endl;
             cout << "Bank Branch: " << a[i].branch << endl;
             cout << "Loan Type: " << a[i].loan_type << endl;
             cout << "Docs Required: " << a[i].docs_required << endl;
@@ -194,10 +194,9 @@ int main()
     cout << "\nPrinting all details of the bank:\n ";
     c.PrintMultiplebankdata(b, n);
     int x;
-    cout << "\nEnter the bank's number to be printed: ";
+    cout << "\nEnter the bank's number(starts from 1) to be printed: ";
     cin >> x;
-    cout << "\nPrinting all details of " << x << " bank:\n ";
+    cout << "\nPrinting all details of bank " << x << " :\n ";
     c.PrintSinglebankdata(b[x - 1]);
-
     return 0;
 }
