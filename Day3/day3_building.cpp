@@ -2,33 +2,33 @@
 using namespace std;
 int n, m, sum;
 
-bool doesExist_valid(int x, int y, int **arr, bool **vis)
+bool DoesExistAndUnvisited(int x, int y, int **people_in_buildings, bool **visited)
 {
-    if (x < 0 || x >= n || y < 0 || y >= m || arr[x][y] == 0) // doesn't exist and not zero
+    if (x < 0 || x >= n || y < 0 || y >= m || people_in_buildings[x][y] == 0) // doesn't exist and not zero
         return false;
-    if (vis[x][y] == true) // already visited
+    if (visited[x][y] == true) // already visited
         return false;
     return true;
 }
 
 // To move left, up, right, down while performing DFS
-int temp_x[] = {-1, 0, 1, 0};
-int temp_y[] = {0, 1, 0, -1};
+int move_x[] = {-1, 0, 1, 0};
+int move_y[] = {0, 1, 0, -1};
 
 // Searcher
-void dfs(int x, int y, int **arr, bool **vis)
+void dfs(int x, int y, int **people_in_buildings, bool **visited)
 {
-    if (!doesExist_valid(x, y, arr, vis))
+    if (!DoesExistAndUnvisited(x, y, people_in_buildings, visited))
     {
         return;
     }
-    sum += arr[x][y];
-    vis[x][y] = true;
+    sum += people_in_buildings[x][y];
+    visited[x][y] = true;
     for (int i = 0; i < 4; i++)
     {
-        // if(doesExist_valid(x+temp_x[i],y+temp_y[i],arr,vis)){
+        // if(DoesExistAndUnvisited(x+move_x[i],y+move_y[i],people_in_buildings,visited)){
 
-        dfs(x + temp_x[i], y + temp_y[i], arr, vis);
+        dfs(x + move_x[i], y + move_y[i], people_in_buildings, visited);
     }
 }
 
@@ -40,15 +40,15 @@ int main()
     cout << "Enter the y (n) coordinate length: ";
     cin >> n;
     int max = 0;
-    // Allocating 2d array of size m*n
-    int **arr = new int *[m];
+    // Allocating 2d people_in_buildingsay of size m*n
+    int **people_in_buildings = new int *[m];
     bool **visited = new bool *[m];
-    int **grouper = new int *[m]; // max possible group size is size of arr i.e m*n
+    int **groups = new int *[m]; // max possible group size is size of people_in_buildings i.e m*n
     for (int i = 0; i < m; i++)
     {
-        arr[i] = new int[n];
+        people_in_buildings[i] = new int[n];
         visited[i] = new bool[n];
-        grouper[i] = new int[n];
+        groups[i] = new int[n];
     }
 
     // getting input from user
@@ -56,9 +56,9 @@ int main()
     {
         for (int j = 0; j < n; j++)
         {
-            cin >> arr[i][j];
+            cin >> people_in_buildings[i][j];
             visited[i][j] = false;
-            grouper[i][j] = 0;
+            groups[i][j] = 0;
         }
     }
     // calling dfs
@@ -68,11 +68,11 @@ int main()
         for (int j = 0; j < n; j++)
         {
             sum = 0;
-            dfs(i, j, arr, visited);
+            dfs(i, j, people_in_buildings, visited);
             if (sum > 0)
             {
-                grouper[i][j] = sum;
-                cout << grouper[i][j] << " ";
+                groups[i][j] = sum;
+                cout << groups[i][j] << " ";
             }
         }
     }
@@ -80,7 +80,7 @@ int main()
     {
         for (int j = 0; j < n; j++)
         {
-            max = max > grouper[i][j] ? max : grouper[i][j];
+            max = max > groups[i][j] ? max : groups[i][j];
         }
     }
     cout << "\nThe leader group is: " << max;
@@ -88,12 +88,12 @@ int main()
     // Deallocate
     for (int i = 0; i < m; i++)
     {
-        delete[] arr[i];
+        delete[] people_in_buildings[i];
         delete[] visited[i];
-        delete[] grouper[i];
+        delete[] groups[i];
     }
-    delete[] arr;
+    delete[] people_in_buildings;
     delete[] visited;
-    delete[] grouper;
+    delete[] groups;
     return 0;
 }
