@@ -2,12 +2,12 @@
 #include <string>
 #include <vector>
 using namespace std;
-class broker; // forward declaration
+class Broker; // forward declaration
 // Base classes bank,loan
-class bankDetails
+class BankDetails
 {
 public:
-    string bankName, establishedDate, bankType, branch;
+    string bank_name, established_date, bank_type, branch;
     virtual string getName() = 0;
     virtual string getEstablishedDate() = 0;
     virtual string getBankType() = 0;
@@ -15,51 +15,51 @@ public:
     void getInfo()
     {
         cout << endl
-             << "Bank Name: " << bankName << endl;
-        cout << "Established Date: " << establishedDate << endl;
-        cout << "Bank Type: " << bankType << endl
+             << "Bank Name: " << bank_name << endl;
+        cout << "Established Date: " << established_date << endl;
+        cout << "Bank Type: " << bank_type << endl
              << endl;
         cout << "Bank Branch: " << branch << endl;
     }
 };
 
-class loan
+class Loan
 {
 public:
-    string loanType, docsrequired;
-    float interestRate;
+    string loan_type, docs_required;
+    float interest_rate;
     // friend class compare; //friend class
-    string getLoanType() { return loanType; }
-    string getDocsRequired() { return docsrequired; }
-    float getInterestRate() { return interestRate; }
+    string getLoanType() { return loan_type; }
+    string getDocsRequired() { return docs_required; }
+    float getInterestRate() { return interest_rate; }
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-class BANK : public bankDetails, public loan
+class Bank : public BankDetails, public Loan
 {
 public:
-    friend class broker;
-    BANK()
+    friend class Broker;
+    Bank()
     {
 
         cout << "\nEnter the name of the bank: ";
-        cin >> bankName;
+        cin >> bank_name;
         cout << endl;
 
         cout << "Enter the established date of the bank: ";
-        cin >> establishedDate;
+        cin >> established_date;
         cout << endl;
 
         cout << "Enter the type of the bank: ";
-        cin >> bankType;
+        cin >> bank_type;
         cout << endl;
 
         cout << "Enter the Types of the loan available: ";
-        cin >> loanType;
+        cin >> loan_type;
         cout << endl;
 
         cout << "Enter the docs required for the loan: ";
-        cin >> docsrequired;
+        cin >> docs_required;
         cout << endl;
 
         cout << "Enter the bank branch: ";
@@ -67,21 +67,21 @@ public:
         cout << endl;
 
         cout << "Enter the interest rate of the loan: ";
-        cin >> interestRate;
+        cin >> interest_rate;
         cout << endl;
     }
 
     string getName()
     {
-        return bankName;
+        return bank_name;
     }
     string getEstablishedDate()
     {
-        return establishedDate;
+        return established_date;
     }
     string getBankType()
     {
-        return bankType;
+        return bank_type;
     }
     string getBranch()
     {
@@ -90,60 +90,60 @@ public:
 };
 //-----------------------------------------------------------------------------------------------------------------------------
 
-class broker
+class Broker
 {
 public:
     // compare interest Rates of 2 banks
-    void compareInterestRate(BANK b1, BANK b2)
+    void CompareInterestRate(Bank b1, Bank b2)
     {
-        b1.interestRate < b2.interestRate ? cout << "Bank with Lowest interest is: " << b1.bankName << endl : cout << "Bank with Lowest interest is: " << b2.bankName << endl;
+        b1.interest_rate < b2.interest_rate ? cout << "Bank with Lowest interest is: " << b1.bank_name << endl : cout << "Bank with Lowest interest is: " << b2.bank_name << endl;
     }
     // compare interest Rates of 3 banks
-    void compareInterestRate(BANK b1, BANK b2, BANK b3)
+    void CompareInterestRate(Bank b1, Bank b2, Bank b3)
     {
-        b1.interestRate < b2.interestRate ? cout << "Bank with Lowest interest is: " << b1.bankName << endl : b2.interestRate < b3.interestRate ? cout << "Bank with Lowest interest is: " << b2.bankName << endl
-                                                                                                                                                : cout << "Bank with Lowest interest is: " << b3.bankName << endl;
+        b1.interest_rate < b2.interest_rate ? cout << "Bank with Lowest interest is: " << b1.bank_name << endl : b2.interest_rate < b3.interest_rate ? cout << "Bank with Lowest interest is: " << b2.bank_name << endl
+                                                                                                                                                     : cout << "Bank with Lowest interest is: " << b3.bank_name << endl;
     }
 
     // compare interest Rates of n banks
-    void compareInterestRate(BANK a[], int n)
+    void CompareInterestRate(Bank a[], int n)
     {
-        float min = a[0].interestRate;
+        float min = a[0].interest_rate;
         int index = 0;
         for (int i = 0; i < n; i++)
         {
-            if (a[i].interestRate < min)
+            if (a[i].interest_rate < min)
             {
-                min = a[i].interestRate;
+                min = a[i].interest_rate;
                 index = i;
             }
         }
-        cout << "The bank with the lowest interest rate is: " << a[index].bankName << endl;
+        cout << "The bank with the lowest interest rate is: " << a[index].bank_name << endl;
         cout << "The interest rate is: " << min << endl;
     }
     // print all details of the bank
-    void printSinglebankdata(BANK a)
+    void PrintSinglebankdata(Bank a)
     {
-        cout << "\nBank Name: " << a.bankName << endl;
-        cout << "Established Date: " << a.establishedDate << endl;
-        cout << "Bank Type: " << a.bankType << endl;
+        cout << "\nBank Name: " << a.bank_name << endl;
+        cout << "Established Date: " << a.established_date << endl;
+        cout << "Bank Type: " << a.bank_type << endl;
         cout << "Bank Branch: " << a.branch << endl;
-        cout << "Loan Type: " << a.loanType << endl;
-        cout << "Docs Required: " << a.docsrequired << endl;
-        cout << "Interest Rate: " << a.interestRate << endl;
+        cout << "Loan Type: " << a.loan_type << endl;
+        cout << "Docs Required: " << a.docs_required << endl;
+        cout << "Interest Rate: " << a.interest_rate << endl;
     }
     // print all details of multiple banks
-    void printMultiplebankdata(BANK a[], int n)
+    void PrintMultiplebankdata(Bank a[], int n)
     {
         for (int i = 0; i < n; i++)
         {
-            cout << "\nBank Name: " << a[i].bankName << endl;
-            cout << "Established Date: " << a[i].establishedDate << endl;
-            cout << "Bank Type: " << a[i].bankType << endl;
+            cout << "\nBank Name: " << a[i].bank_name << endl;
+            cout << "Established Date: " << a[i].established_date << endl;
+            cout << "Bank Type: " << a[i].bank_type << endl;
             cout << "Bank Branch: " << a[i].branch << endl;
-            cout << "Loan Type: " << a[i].loanType << endl;
-            cout << "Docs Required: " << a[i].docsrequired << endl;
-            cout << "Interest Rate: " << a[i].interestRate << endl;
+            cout << "Loan Type: " << a[i].loan_type << endl;
+            cout << "Docs Required: " << a[i].docs_required << endl;
+            cout << "Interest Rate: " << a[i].interest_rate << endl;
         }
     }
 };
@@ -156,7 +156,7 @@ int main()
     int n;
     cout << "Enter No of banks : ";
     cin >> n;
-    BANK *b = new BANK[n];
+    Bank *b = new Bank[n];
     for (int i = 0; i != n; i++)
     {
         cout << endl
@@ -179,24 +179,24 @@ int main()
         cout << endl;
         cout << '\n';
     }
-    // broker class methods zone
-    broker c;
+    // Broker class methods zone
+    Broker c;
     if (n > 2)
     {
         cout << "\nComparing two banks:\n ";
-        c.compareInterestRate(b[0], b[1]);
+        c.CompareInterestRate(b[0], b[1]);
         cout << "\nComparing three banks:\n ";
-        c.compareInterestRate(b[0], b[1], b[2]);
+        c.CompareInterestRate(b[0], b[1], b[2]);
     }
     cout << "----------------\n This can compare n banks:\n ";
-    c.compareInterestRate(b, n); // multiple banks comparison
+    c.CompareInterestRate(b, n); // multiple banks comparison
     cout << "\nPrinting all details of the bank:\n ";
-    c.printMultiplebankdata(b, n);
+    c.PrintMultiplebankdata(b, n);
     int x;
     cout << "\nEnter the bank's number to be printed: ";
     cin >> x;
     cout << "\nPrinting all details of " << x << " bank:\n ";
-    c.printSinglebankdata(b[x - 1]);
+    c.PrintSinglebankdata(b[x - 1]);
 
     return 0;
 }
