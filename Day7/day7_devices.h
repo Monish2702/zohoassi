@@ -5,6 +5,7 @@ using std::cout;
 using std::endl;
 using std::string;
 
+
 // Actuator 1) Smart Fan
 class SmartFan : public TemperatureSensor
 {
@@ -40,6 +41,11 @@ public:
     ~SmartFan(){}
 };
 
+
+
+
+
+
 // Actuator 2) Smart Light
 class SmartLight : public LuminanceSensor
 {   
@@ -74,6 +80,16 @@ public:
     }
 };
 
+
+
+
+
+
+
+
+
+
+
 // Actuator 3) Motor
 class Motor : public MotionSensor //door control
 {
@@ -106,6 +122,10 @@ public:
         }
     }
 };
+
+
+
+
 
 // Actuator 4) Pump
 class WaterPump : public WaterLevelSensor
