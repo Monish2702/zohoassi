@@ -1,8 +1,10 @@
 #include <windows.h>
+
 #include "day7_devices.h"
 
 int main()
 {
+    
     bool exit = false;
     controller c;
     // cout<< "Enter current battery level : "<<endl;

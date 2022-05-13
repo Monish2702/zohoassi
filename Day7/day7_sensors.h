@@ -1,10 +1,11 @@
 #include <iostream>
-using std::cin;
-using std::cout;
-using std::endl;
-using std::string;
-
-//Parent class
+using namespace std;
+// using std::cin;
+// using std::cout;
+// using std::endl;
+// using std::string;
+// using std::vector;
+// //Parent class
 class Devices
 {
 public:
