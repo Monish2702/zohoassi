@@ -1,163 +1,144 @@
 #include "day7_sensors.h"
-#include <iostream>
-using std::cin;
-using std::cout;
-using std::endl;
-using std::string;
 
-
-// Actuator 1) Smart Fan
-class SmartFan : public TemperatureSensor
+class controller
 {
 public:
-    float newTemperature;
-    int newBatteryLevel;
-    SmartFan(float newTemperature, int newBatteryLevel)
+    string command;
+    int battery_level_to_turn_on_sensors, battery_level;
+    int temperature_to_turn_on_fan, luminance_to_turn_on_light, height_to_turn_on_water_pump, ppm_to_turn_on_gas_pump;
+    // Devices D;
+    // D.battery_level= battery_level;
+    void set_initial_conditions()
     {
-        this->newTemperature = newTemperature;
-        this->newBatteryLevel = newBatteryLevel;
-        OnConnect();
-        onTemperatureChange(newTemperature);
+        cout << "Enter battery level to turn on sensors: ";
+        cin >> battery_level_to_turn_on_sensors;
+        cout << "Enter temperature to turn on fan: ";
+        cin >> temperature_to_turn_on_fan;
+        cout << "Enter luminance to turn on light: ";
+        cin >> luminance_to_turn_on_light;
+        cout << "Enter height to turn on water pump: ";
+        cin >> height_to_turn_on_water_pump;
+        cout << "Enter ppm to turn on gas pump: ";
+        cin >> ppm_to_turn_on_gas_pump;
+        cout << "Initial conditions set..." << endl;
+        cout << "Starting program..." << endl;
+        cout << "Press 'ESC' to exit program" << endl;
+        cout << "\n";
     }
-    bool OnOff()
+
+    TemperatureSensor Temperature;
+    LuminanceSensor Luminance;
+    MotionSensor Motion;
+    GasDetectionsSensor Gas;
+    WaterLevelSensor Water;
+    SmartFan Fan;
+    SmartLight Light;
+    Door Door;
+    WaterPump Pump;
+    GasAlarm Alarm;
+    // Gas.battery = battery_level_to_turn_on_sensors;
+    void sensing()
     {
-        if(newBatteryLevel > 15)
+        cin >> command;
+        //temperature-fan
+        if (command[0] == 't')
         {
-        if (sTemperature > 15)
+            --Temperature.battery;
+            if (Temperature.battery > battery_level_to_turn_on_sensors)
+            {
+            if (command[1] == 'i')
+                Temperature.onTemperatureChange(1);
+            else if (command[1] == 'd')
+                Temperature.onTemperatureChange(0);
+            if (Temperature.sensor_temperature > temperature_to_turn_on_fan)
+                Fan.switch_on();
+            else
+                Fan.switch_off();
+            }
+            else
+                cout<<"Battery level is low, please charge the battery"<<endl;
+        }
+        //luminance-light
+        else if (command[0] == 'l')
         {
-            cout << "Fan is : " << OnConnect() << endl;
+            --Luminance.battery;
+            if (Luminance.battery > battery_level_to_turn_on_sensors)
+            {
+            if (command[1] == 'i')
+                Luminance.onLuminanceChange(1);
+            else if (command[1] == 'd')
+                Luminance.onLuminanceChange(0);
+            if (Luminance.sensor_luminance > luminance_to_turn_on_light)
+                Light.switch_on();
+            else
+                Light.switch_off();
+            }
+            else
+                cout<<"Battery level is low, please charge the battery"<<endl;
         }
-        else
+        //motion-door
+        else if (command[0] == 'd')
         {
-            cout << "Fan is :" << OnDisconnect() << endl;
+            --Motion.battery;
+            if (Motion.battery>battery_level_to_turn_on_sensors)
+            {
+            if (command[1] == 'o')
+                Door.openDoor();
+            else if (command[1] == 'c')
+                Door.closeDoor();
+            }
+            else
+            {
+                cout<<"Battery level is low, please charge the battery"<<endl;
+            }
         }
+        //gas-alarm
+        else if (command[0] == 'g')
+        {
+           --Gas.battery;
+           if(Gas.battery>battery_level_to_turn_on_sensors)
+           { if (command[1] == 'i')
+                Gas.onGasChange(1);
+            else if (command[1] == 'd')
+                Gas.onGasChange(0);
+            if (Gas.gas_ppm > ppm_to_turn_on_gas_pump)
+                Alarm.switch_on();
+            else
+                Alarm.switch_off();
+           }
+           else 
+              {
+                cout<<"Battery level is low, please charge the battery"<<endl;
+              }
         }
-        else
-        { 
-            return false;
-            cout << "Battery is low" << endl;
+        // water-pump
+        else if (command[0] == 'w')
+        {
+            --Water.battery;
+            if (Water.battery > battery_level_to_turn_on_sensors)
+            {
+            if (command[1] == 'i')
+                Water.OnWaterLevelChange(1);
+            else if (command[1] == 'd')
+                Water.OnWaterLevelChange(0);
+            if (Water.water_level > height_to_turn_on_water_pump)
+                Pump.switch_on();
+            else
+                Pump.switch_off();
+            }
+            else
+                cout<<"Battery level is low, please charge the battery"<<endl;
         }
+
     }
-    ~SmartFan(){}
-};
 
-
-
-
-
-
-// Actuator 2) Smart Light
-class SmartLight : public LuminanceSensor
-{   
-public:
-    float newLuminance;
-    int newBatteryLevel;
-    SmartLight(float newLuminance, int newBatteryLevel)
-    {
-        this->newLuminance = newLuminance;
-        this->newBatteryLevel = newBatteryLevel;
-        OnConnect();
-        onLuminanceChange(newLuminance);
-    }
-    bool OnOff()
-    {
-        if(battery > 15)
+        void onBatteryLevelChange(int newBatteryLevel)
         {
-        if (sLuminance > 25)
-        {
-            cout << "Light is : " << OnConnect() << endl;
+            Fan.onBatteryLevelChange(newBatteryLevel);
+            Fan.onBatteryLevelChange(newBatteryLevel);
+            Light.onBatteryLevelChange(newBatteryLevel);
+            Door.onBatteryLevelChange(newBatteryLevel);
+            Pump.onBatteryLevelChange(newBatteryLevel);
+            Gas.onBatteryLevelChange(newBatteryLevel);
         }
-        else
-        {
-            cout << "Light is :" << OnDisconnect() << endl;
-        }
-        }
-        else
-        { 
-            return false;
-            cout << "Battery is low" << endl;
-        }
-    }
-};
-
-
-
-
-
-
-
-
-
-
-
-// Actuator 3) Motor
-class Motor : public MotionSensor //door control
-{
-public:
-    int newBatteryLevel; bool isPresent;
-    Motor(bool isPresent, int newBatteryLevel)
-    {
-        this->isPresent = isPresent;
-        this->newBatteryLevel = newBatteryLevel;
-        OnConnect();
-        OnMotionChange(isPresent);
-    }
-    bool OnOff()
-    {
-        if(battery > 15)
-        {
-        if (isPresent)
-        {
-            cout << "Motor is : " << OnConnect() << endl;
-        }
-        else
-        {
-            cout << "Motor is :" << OnDisconnect() << endl;
-        }
-        }
-        else
-        { 
-            return false;
-            cout << "Battery is low" << endl;
-        }
-    }
-};
-
-
-
-
-
-// Actuator 4) Pump
-class WaterPump : public WaterLevelSensor
-{  
-public:
-    int newBatteryLevel;
-    float newWaterLevel;
-    WaterPump(float newWaterLevel, float newBatteryLevel)
-    {
-        this->newBatteryLevel = newBatteryLevel;
-        this->newWaterLevel = newWaterLevel;
-        OnConnect();
-        OnWaterLevelChange(newWaterLevel);
-    }
-    int battery = onBatteryLevelChange(newBatteryLevel);
-    bool OnOff()
-    {
-        if(battery > 15)
-        {
-        if (sWater<50)
-        {
-            cout << "Water Pump is : " << OnConnect() << endl;
-        }
-        else
-        {
-            cout << "Water Pump is :" << OnDisconnect() << endl;
-        }
-        }
-        else
-        { 
-            return false;
-            cout << "Battery is low" << endl;
-        }
-    }
-};
+    };
