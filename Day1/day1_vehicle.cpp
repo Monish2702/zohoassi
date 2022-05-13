@@ -48,10 +48,20 @@ public:
     //  bool operator< (const vehicle& v1){    // overloading operator < without friend
     //     return this->price < v1.price;
     // }
-    // friend ostream &operator<<(ostream &print, const Vehicle &v);
+    friend ostream &operator<<(ostream &print, const Vehicle &v);
     virtual int getNoOfWheels() = 0;
 };
 
+ostream &operator<<(ostream &print, const Vehicle &v)
+{
+    print << "Vehicle type: " << vehicleTypeString[v.type] << endl;
+    print << "Brand: " << v.brand << endl;
+    print << "Model: " << v.model << endl;
+    print << "Color: " << v.color << endl;
+    print << "Mileage: " << v.mileage << endl;
+    print << "Price: " << v.price << endl;
+    return print;
+}
 bool operator<(const Vehicle &v1, const Vehicle &v2)
 { // friend function to comapre prices
     return v1.price < v2.price;
@@ -75,20 +85,14 @@ public:
     }
     friend ostream &operator<<(ostream &print, Car &v);
 };
-
 ostream &operator<<(ostream &print, Car &v)
 { // friend function to print bike details
-    print << "Vehicle type: " << vehicleTypeString[v.type] << endl;
-    print << "Brand: " << v.brand << endl;
-    print << "Model: " << v.model << endl;
-    print << "Color: " << v.color << endl;
-    print << "Mileage: " << v.mileage << endl;
-    print << "Price: " << v.price << endl;
+    print << (Vehicle &)v;
     print << "No of persons: " << v.no_of_persons << endl;
-    print << "Number of wheels in car 1: " << v.getNoOfWheels() << endl;
     print << "Car type: " << carTypeString[v.car_type] << endl;
     return print;
 }
+
 //---------------------------------------------------------------------------------------------------------------------------------
 // Derived class-2 Bike
 class Bike : public Vehicle
@@ -106,21 +110,12 @@ public:
     int getNoOfWheels()
     {
         return 2;
-        // cout << "Enter no of wheels in your bike: " << endl;
-        // cin >> no_of_wheels;
-        // cout << "No of wheels in your bike: " << no_of_wheels << endl;
     }
     friend ostream &operator<<(ostream &print, Bike &v);
 };
-
 ostream &operator<<(ostream &print, Bike &v)
 { // friend function to print bike details
-    print << "Vehicle type: " << vehicleTypeString[v.type] << endl;
-    print << "Brand: " << v.brand << endl;
-    print << "Model: " << v.model << endl;
-    print << "Color: " << v.color << endl;
-    print << "Mileage: " << v.mileage << endl;
-    print << "Price: " << v.price << endl;
+    print << (Vehicle &)v;
     print << "Weight: " << v.weight << endl;
     print << "Number of wheels in bike: " << v.getNoOfWheels() << endl;
     print << "Bike type: " << bicycleTypeString[v.bike_type] << endl;
