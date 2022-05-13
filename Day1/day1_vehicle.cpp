@@ -48,7 +48,7 @@ public:
     //  bool operator< (const vehicle& v1){    // overloading operator < without friend
     //     return this->price < v1.price;
     // }
-    friend ostream &operator<<(ostream &print, const Vehicle &v);
+    // friend ostream &operator<<(ostream &print, const Vehicle &v);
     virtual int getNoOfWheels() = 0;
 };
 
