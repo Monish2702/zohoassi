@@ -7,9 +7,10 @@ Model: civic
 Color: red
 Mileage: 25
 Price: 12000.8
-
-Car Type: sedan
+No of persons: 4
 Number of wheels in car 1: 4
+Car type: sedan
+
 
 ------------------------------------------
 For car 2:
@@ -20,9 +21,11 @@ Model: city
 Color: black
 Mileage: 23.4
 Price: 15000.5
+No of persons: 4
+Number of wheels in car 1: 4
+Car type: suv
 
-Car Type: suv
-Number of wheels in car 2: 4
+
 ------------------------------------------
 For bike:
 
@@ -32,9 +35,10 @@ Model: splender
 Color: blue
 Mileage: 50.2
 Price: 12000.4
-
-Bike Type: scooter
+Weight: 100
 Number of wheels in bike: 2
+Bike type: scooter
+
 
 ------------------------------------------
 Car 1 is cheaper than car 2

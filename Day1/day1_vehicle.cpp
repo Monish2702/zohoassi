@@ -57,17 +57,6 @@ bool operator<(const Vehicle &v1, const Vehicle &v2)
     return v1.price < v2.price;
 }
 
-ostream &operator<<(ostream &print, const Vehicle &v)
-{ // friend function to print vehicle details
-    print << "Vehicle type: " << vehicleTypeString[v.type] << endl;
-    print << "Brand: " << v.brand << endl;
-    print << "Model: " << v.model << endl;
-    print << "Color: " << v.color << endl;
-    print << "Mileage: " << v.mileage << endl;
-    print << "Price: " << v.price << endl;
-    return print;
-}
-//---------------------------------------------------------------------------------------------------------------------------------
 // Derived class-1 Car
 class Car : public Vehicle
 {
@@ -84,8 +73,22 @@ public:
     {
         return 4;
     }
+    friend ostream &operator<<(ostream &print, Car &v);
 };
 
+ostream &operator<<(ostream &print, Car &v)
+{ // friend function to print bike details
+    print << "Vehicle type: " << vehicleTypeString[v.type] << endl;
+    print << "Brand: " << v.brand << endl;
+    print << "Model: " << v.model << endl;
+    print << "Color: " << v.color << endl;
+    print << "Mileage: " << v.mileage << endl;
+    print << "Price: " << v.price << endl;
+    print << "No of persons: " << v.no_of_persons << endl;
+    print << "Number of wheels in car 1: " << v.getNoOfWheels() << endl;
+    print << "Car type: " << carTypeString[v.car_type] << endl;
+    return print;
+}
 //---------------------------------------------------------------------------------------------------------------------------------
 // Derived class-2 Bike
 class Bike : public Vehicle
@@ -107,8 +110,22 @@ public:
         // cin >> no_of_wheels;
         // cout << "No of wheels in your bike: " << no_of_wheels << endl;
     }
+    friend ostream &operator<<(ostream &print, Bike &v);
 };
 
+ostream &operator<<(ostream &print, Bike &v)
+{ // friend function to print bike details
+    print << "Vehicle type: " << vehicleTypeString[v.type] << endl;
+    print << "Brand: " << v.brand << endl;
+    print << "Model: " << v.model << endl;
+    print << "Color: " << v.color << endl;
+    print << "Mileage: " << v.mileage << endl;
+    print << "Price: " << v.price << endl;
+    print << "Weight: " << v.weight << endl;
+    print << "Number of wheels in bike: " << v.getNoOfWheels() << endl;
+    print << "Bike type: " << bicycleTypeString[v.bike_type] << endl;
+    return print;
+}
 //---------------------------------------------------------------------------------------------------------------------------------
 int main()
 {
@@ -124,24 +141,18 @@ int main()
     cout << "For car 1:\n"
          << endl;
     cout << c1 << endl;
-    cout << "Car Type: " << carTypeString[c1.car_type] << endl;
-    cout << "Number of wheels in car 1: " << c1.getNoOfWheels() << endl;
     cout << endl
          << "------------------------------------------" << endl;
     //-----------------------------------------------------------------------------------------
     cout << "For car 2:\n"
          << endl;
     cout << c2 << endl;
-    cout << "Car Type: " << carTypeString[c2.car_type] << endl;
-    cout << "Number of wheels in car 2: " << c2.getNoOfWheels();
     cout << endl
          << "------------------------------------------" << endl;
     //-----------------------------------------------------------------------------------------
     cout << "For bike:\n"
          << endl;
     cout << b << endl;
-    cout << "Bike Type: " << bicycleTypeString[b.bike_type] << endl;
-    cout << "Number of wheels in bike: " << b.getNoOfWheels() << endl;
     cout << endl
          << "------------------------------------------" << endl;
     //-----------------------------------------------------------------------------------------
