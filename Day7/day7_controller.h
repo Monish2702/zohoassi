@@ -6,9 +6,6 @@ class controller
 public:
     string command;
     int battery_level_to_turn_on_sensors, battery_level;
-    int temperature_to_turn_on_fan, luminance_to_turn_on_light, height_to_turn_on_water_pump, ppm_to_turn_on_gas_pump;
-    // Devices D;
-    // D.battery_level= battery_level;
     void set_initial_conditions()
     {
 
@@ -87,16 +84,18 @@ public:
                 else
                     Light.switch_off();
             }
-            else{
-                cout << "Battery level is low" << endl;
-            cout << "Do you want to charge the battery of light? (y/n)" << endl;
-            char ch;
-            cin >> ch;
-            if (ch == 'y')
+            else
             {
-                Gas.battery = 30;
-                cout << "Battery charged to 30%" << endl;
-            }}
+                cout << "Battery level is low" << endl;
+                cout << "Do you want to charge the battery of light? (y/n)" << endl;
+                char ch;
+                cin >> ch;
+                if (ch == 'y')
+                {
+                    Gas.battery = 30;
+                    cout << "Battery charged to 30%" << endl;
+                }
+            }
         }
         // motion-door
         else if (command[0] == 'd')
@@ -165,16 +164,18 @@ public:
                 else
                     Pump.switch_off();
             }
-            else{
-                cout << "Battery level is low" << endl;
-            cout << "Do you want to charge the battery of water level sensor? (y/n)" << endl;
-            char ch;
-            cin >> ch;
-            if (ch == 'y')
+            else
             {
-                Gas.battery = 30;
-                cout << "Battery charged to 30%" << endl;
-            }}
+                cout << "Battery level is low" << endl;
+                cout << "Do you want to charge the battery of water level sensor? (y/n)" << endl;
+                char ch;
+                cin >> ch;
+                if (ch == 'y')
+                {
+                    Gas.battery = 30;
+                    cout << "Battery charged to 30%" << endl;
+                }
+            }
         }
     }
 

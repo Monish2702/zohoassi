@@ -1,5 +1,3 @@
-
-
 #include "day7_controller.h"
 
 int main()

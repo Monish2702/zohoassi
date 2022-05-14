@@ -4,22 +4,24 @@
 #include <vector>
 #include <iterator>
 #include <windows.h>
+// using namespace std;
 using std::cin;
 using std::cout;
 using std::endl;
-using std::string;
-using std::vector;
-using std::stringstream;
 using std::getline;
+using std::string;
+using std::stringstream;
+using std::vector;
 using std::ws;
-// //Parent class
+
+// Parent class
 class Devices
 {
 public:
     bool OnOffStatus;
     int newBatteryLevel;
     int battery;
-    Devices() 
+    Devices()
     {
         battery = 25;
     }
@@ -51,18 +53,18 @@ public:
     TemperatureSensor()
     {
         OnConnect();
-        battery=30;
-        sensor_temperature=25;
+        battery = 30;
+        sensor_temperature = 25;
     }
 
     int battery = onBatteryLevelChange(newBatteryLevel);
     float onTemperatureChange(bool increase)
     {
-        if(increase)
+        if (increase)
             ++sensor_temperature;
-        else 
-           --sensor_temperature;
-        cout<<"Temperature: "<<sensor_temperature<<endl;
+        else
+            --sensor_temperature;
+        cout << "Temperature: " << sensor_temperature << endl;
         return sensor_temperature;
     }
 };
@@ -75,21 +77,20 @@ public:
     LuminanceSensor()
     {
         OnConnect();
-        battery=30;
-        sensor_luminance=25;
+        battery = 30;
+        sensor_luminance = 25;
     }
 
     int battery = onBatteryLevelChange(newBatteryLevel);
     float onLuminanceChange(bool increase)
     {
-        if(increase)
+        if (increase)
             ++sensor_luminance;
-        else 
-           --sensor_luminance;
-        cout<<"Temperature: "<<sensor_luminance<<endl;
+        else
+            --sensor_luminance;
+        cout << "Temperature: " << sensor_luminance << endl;
         return sensor_luminance;
     }
-
 };
 
 // Sensor 3) Motion(proximity)
@@ -100,22 +101,22 @@ public:
     MotionSensor()
     {
         OnConnect();
-        battery=30;
+        battery = 30;
         sensor_motion = false;
     }
 
     int battery = onBatteryLevelChange(newBatteryLevel);
     float onMotionChange(bool newMotion)
     {
-        if(sensor_motion)
+        if (sensor_motion)
             sensor_motion = true;
-        else 
+        else
             sensor_motion = false;
-        cout<<"Motion: "<<sensor_motion<<endl;
+        cout << "Motion: " << sensor_motion << endl;
     }
 };
 
-//sensor 4) WaterLevel sensor
+// sensor 4) WaterLevel sensor
 class WaterLevelSensor : public Devices
 {
 public:
@@ -123,18 +124,18 @@ public:
     WaterLevelSensor()
     {
         OnConnect();
-        battery=30;
+        battery = 30;
         water_level = 25;
     }
 
     int battery = onBatteryLevelChange(newBatteryLevel);
     float OnWaterLevelChange(bool newWater)
     {
-        if(newWater)
+        if (newWater)
             ++water_level;
-        else 
+        else
             --water_level;
-        cout<<"Water Level: "<<water_level<<endl;
+        cout << "Water Level: " << water_level << endl;
         return water_level;
     }
 };
@@ -147,21 +148,20 @@ public:
     GasDetectionsSensor()
     {
         OnConnect();
-        battery=30;
-        gas_ppm=25;
+        battery = 30;
+        gas_ppm = 25;
     }
     int battery = onBatteryLevelChange(newBatteryLevel);
     float onGasChange(bool newGas)
     {
-        if(newGas)
-            ++gas_ppm;  
-        else 
+        if (newGas)
+            ++gas_ppm;
+        else
             --gas_ppm;
-        cout<<"Gas: "<<gas_ppm<<endl;
+        cout << "Gas: " << gas_ppm << endl;
         return gas_ppm;
     }
 };
-
 
 // Actuator 1) Smart Fan
 class SmartFan : public Devices
@@ -169,11 +169,11 @@ class SmartFan : public Devices
 public:
     void switch_on()
     {
-    cout<<"Fan is :"<<OnConnect()<<endl;
+        cout << "Fan is :" << OnConnect() << endl;
     }
     void switch_off()
     {
-    cout<<"Fan is :"<<OnDisconnect()<<endl;
+        cout << "Fan is :" << OnDisconnect() << endl;
     }
 };
 
@@ -183,13 +183,12 @@ class SmartLight : public Devices
 public:
     void switch_on()
     {
-    cout<<"Light is :"<<OnConnect()<<endl;
+        cout << "Light is :" << OnConnect() << endl;
     }
     void switch_off()
     {
-    cout<<"Light is :"<<OnDisconnect()<<endl;
+        cout << "Light is :" << OnDisconnect() << endl;
     }
-
 };
 
 // Actuator 3) Door
@@ -198,11 +197,11 @@ class Door : public Devices // door control
 public:
     void openDoor()
     {
-    cout<<"Door is :"<<OnConnect()<<endl;
+        cout << "Door is :" << OnConnect() << endl;
     }
     void closeDoor()
     {
-    cout<<"Door is :"<<OnDisconnect()<<endl;
+        cout << "Door is :" << OnDisconnect() << endl;
     }
 };
 
@@ -212,24 +211,24 @@ class WaterPump : public Devices
 public:
     void switch_on()
     {
-    cout<<"Pump is :"<<OnConnect()<<endl;
+        cout << "Pump is :" << OnConnect() << endl;
     }
     void switch_off()
     {
-    cout<<"Pump is :"<<OnDisconnect()<<endl;
+        cout << "Pump is :" << OnDisconnect() << endl;
     }
 };
 
 // Actuator 5) Gas Alarm
 class GasAlarm : public Devices
-{  
+{
 public:
     void switch_on()
     {
-    cout<<"Gas alarm is :"<<OnConnect()<<endl;
+        cout << "Gas alarm is :" << OnConnect() << endl;
     }
     void switch_off()
     {
-    cout<<"Gas alarm is :"<<OnDisconnect()<<endl;
+        cout << "Gas alarm is :" << OnDisconnect() << endl;
     }
 };
