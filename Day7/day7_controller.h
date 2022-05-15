@@ -10,22 +10,36 @@ public:
     {
 
         string s1, s2, word;
+        //----------------------------------------------------------------------------------------------------------------------
+        // LAMBDA FUNCTION
+        auto pushinto = [&](string &word, stringstream &ss) 
+        {
+            while (ss >> word)
+            {
+                condition.push_back(word);
+            }
+        };
+        //----------------------------------------------------------------------------------------------------------------------
         cout << "\n Enter if: ";
         getline(cin >> ws, s1);
         cout << "\n Enter then: ";
         getline(cin >> ws, s2);
         cout << "\n-------------------\n";
         stringstream ss1(s1);
-        while (ss1 >> word)
-        {
-            condition.push_back(word);
-        }
+        pushinto(word, ss1);
         stringstream ss2(s2);
+        pushinto(word, ss2);
+        // without lambda push_back
+        //  while (ss1 >> word)
+        //  {
+        //      condition.push_back(word);
+        //  }
+        //  stringstream ss2(s2);
 
-        while (ss2 >> word)
-        {
-            condition.push_back(word);
-        }
+        // while (ss2 >> word)
+        // {
+        //     condition.push_back(word);
+        // }
     }
 
     TemperatureSensor Temperature;
@@ -64,8 +78,8 @@ public:
                 cin >> ch;
                 if (ch == 'y')
                 {
-                    Gas.battery = 30;
-                    cout << "Battery charged to 30%" << endl;
+                    Temperature.battery = 30;
+                    cout << "Battery charged to: " << Temperature.battery <<"%" << endl;
                 }
             }
         }
@@ -87,13 +101,13 @@ public:
             else
             {
                 cout << "Battery level is low" << endl;
-                cout << "Do you want to charge the battery of light? (y/n)" << endl;
+                cout << "Do you want to charge the battery of light sensor? (y/n)" << endl;
                 char ch;
                 cin >> ch;
                 if (ch == 'y')
                 {
-                    Gas.battery = 30;
-                    cout << "Battery charged to 30%" << endl;
+                    Light.battery = 30;
+                    cout << "Battery charged to: " << Light.battery << "%" << endl;
                 }
             }
         }
@@ -116,8 +130,8 @@ public:
                 cin >> ch;
                 if (ch == 'y')
                 {
-                    Gas.battery = 30;
-                    cout << "Battery charged to 30%" << endl;
+                    Door.battery = 30;
+                    cout << "Battery charged to " << Door.battery <<" % "<< endl;
                 }
             }
         }
@@ -145,7 +159,7 @@ public:
                 if (ch == 'y')
                 {
                     Gas.battery = 30;
-                    cout << "Battery charged to 30%" << endl;
+                    cout << "Battery charged to: " <<Gas.battery << "%" << endl;
                 }
             }
         }
@@ -172,8 +186,8 @@ public:
                 cin >> ch;
                 if (ch == 'y')
                 {
-                    Gas.battery = 30;
-                    cout << "Battery charged to 30%" << endl;
+                    Water.battery = 30;
+                    cout << "Battery charged to: " << Water.battery << "%" << endl;
                 }
             }
         }
