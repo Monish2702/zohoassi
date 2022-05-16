@@ -1,0 +1,71 @@
+PS C:\Users\Kumar ASUS\Desktop\Zoho documents Monish\ZOHO_assi\day7> ./a.exe
+Enter battery level to turn on sensors: 27
+Enter the conditions(in order of temperature, luminance, gas, water):
+<sensor_name> <operator> <value>
+ <device_name> <function>
+
+ Enter if: temperature > 25
+
+ Enter then: turnon fan
+
+-------------------
+
+ Enter if: luminance < 25
+
+ Enter then: turnon light
+
+-------------------
+
+ Enter if: gasconc >  25
+
+ Enter then: turnon alarm
+
+-------------------
+
+ Enter if: water < 25
+
+ Enter then: turnon pump
+
+-------------------
+
+Initial conditions set...
+Starting program...
+Press 'ESC' to exit program
+
+ti
+Temperature: 26
+Fan is :1
+td
+Temperature: 25
+Fan is :0
+ti
+Battery level is low
+Do you want to charge the battery of temperature sensor? (y/n)
+y
+Battery charged to: 30%
+ti
+Temperature: 26
+Fan is :1
+td
+Temperature: 25
+Fan is :0
+do
+Door is :1
+dc
+Door is :0
+do
+Battery level is low
+Do you want to charge the battery of motion sensor? (y/n)
+n
+wi
+Water Level: 26
+Pump is :0
+wd
+Water Level: 25
+Pump is :0
+wd
+Battery level is low
+Do you want to charge the battery of water level sensor? (y/n)
+y
+Battery charged to: 30%
+li
