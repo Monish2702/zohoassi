@@ -33,10 +33,12 @@ public:
             cout << "Entered amount is greater than you due amount" << endl;
         }
     }
-    void display()
+    void update_bill(string number)
     {
-        cout << "Mobile no: " << number << endl;
-        cout << endl;
+        cout << "Enter new bill amount: ";
+        float amount;
+        cin >> amount;
+        bill_amount = bill_amount + amount;
     }
 };
 
@@ -72,11 +74,12 @@ public:
             cout << "Entered amount is greater than you due amount" << endl;
         }
     }
-    void display()
+    void update_bill(string number)
     {
-        cout << "Landline no: " << number << endl;
-        cout << "STD code: " << std_code << endl;
-        cout << endl;
+        cout << "Enter new bill amount: ";
+        float amount;
+        cin >> amount;
+        bill_amount = bill_amount + amount;
     }
 };
 
@@ -87,22 +90,34 @@ class bill_payments
 public:
     vector<T> bill_details;
     bill_payments() {}
-    T tempo;
-    void display()
-    {
-        tempo.display();
-    }
-
     void new_connection()
     {
+        T tempo;
         tempo.new_connection();
         bill_details.push_back(tempo);
-        cout << " No of connections with us is : " << bill_details.size() << endl;
+        cout << "No of connections with us is : " << bill_details.size() << endl;
     }
 
     void pay_bill(string number)
     {
-        tempo.pay_bill(number);
+        for (int i = 0; i < bill_details.size(); i++)
+        {
+            if (bill_details[i].number == number)
+            {
+                bill_details[i].pay_bill(number);
+            }
+        }
+    }
+
+    void update_bill(string number)
+    {
+        for (int i = 0; i < bill_details.size(); i++)
+        {
+            if (bill_details[i].number == number)
+            {
+                bill_details[i].update_bill(number);
+            }
+        }
     }
 
     bool number_exist(string number)
@@ -129,21 +144,18 @@ int main()
         cout << "Enter your choice: " << endl;
         cout << "0-Exit\n1-Add new mobile connection\n2-Add new landline connection" << endl;
         cout << "3-Pay bill using connection number\n4-Update bill amount using connection number" << endl;
-        cout << "--------------------------------------------------------------------------------" << endl;
         cin >> choice;
         switch (choice)
         {
         case 1:
         {
             m.new_connection();
-            m.display();
             break;
         }
         case 2:
         {
 
             l.new_connection();
-            l.display();
             break;
         }
         case 3:
@@ -183,21 +195,12 @@ int main()
             {
                 if (number.length() == 10)
                 {
-                    m.tempo.bill_amount = 0;
-                    cout << "Enter new bill amount: ";
-                    float amount;
-                    cin >> amount;
-                    m.tempo.bill_amount = m.tempo.bill_amount + amount;
-                    m.display();
+                    m.update_bill(number);
                 }
                 else if (number.length() == 9)
                 {
-                    l.tempo.bill_amount = 0;
-                    cout << "Enter new bill amount: ";
-                    float amount;
-                    cin >> amount;
-                    l.tempo.bill_amount = l.tempo.bill_amount + amount;
-                    l.display();
+
+                    l.update_bill(number);
                 }
                 else
                 {
@@ -213,5 +216,6 @@ int main()
             break;
         }
     } while (choice != 0);
+    cout << "--------------------------------------------------------------------------------" << endl;
     return 0;
 }
