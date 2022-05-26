@@ -3,8 +3,14 @@
 #include <cmath>
 struct roots
 {
-    double x1, x2; // to store roots
+    float x1, x2; // to store roots
     bool x;        // to know if roots are real or imaginary
+    roots()
+    {
+        x1 = 0;
+        x2 = 0;
+        x = true;
+    }
 };
 
 namespace parent_namespace // parent namespace
@@ -15,10 +21,10 @@ namespace parent_namespace // parent namespace
         {
         public:      // class to find roots of quadratic equations
             roots r; // struct to store roots
-            roots roots_of_quadratic(double a, double b, double c)
+            roots roots_of_quadratic(float a, float b, float c)
             {                                 // function
-                double x1, x2;                // to store roots here
-                double d = b * b - 4 * a * c; // discriminant
+                float x1, x2;                // to store roots here
+                float d = b * b - 4 * a * c; // discriminant
                 if (d < 0)
                 { // roots are imaginary
                     r.x = false;

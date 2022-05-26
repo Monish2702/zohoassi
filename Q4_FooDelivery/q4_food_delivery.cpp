@@ -1,4 +1,4 @@
-#include "foodDelivery.cpp"
+#include "q4_classes.cpp"
 static int order_count = 0;
 int main()
 {
@@ -19,7 +19,7 @@ int main()
             ++order_count;
             // delivery_history.push_back(order);
             // find least delivery_charge_earned of out 5 delivery executives
-            int minimun_delivery_charge = 2147483647, index = 0;
+            int minimun_delivery_charge = 2147483647, index = 0; // index - contains the index of the DE with least earnings
             for (int i = 0; i < 5; i++)
             {
                 if (executive[i].delivery_charge_earned < minimun_delivery_charge)
@@ -32,7 +32,8 @@ int main()
                  << "Least earned is DE" << index + 1 << endl;
             //----------------------------------------------------------------------------------------------------------------------
             bool customer_id_checker = count(global_customers_id.begin(), global_customers_id.end(), order.customer_id);
-            if(customer_id_checker) cout<<"\nCutomer id exists\n";
+            //checks whether that order is already assigned to DE or not if yes then it will not get reassigned
+            
             bool flag = true;
             for (int i = 0; i < order_count; i++, j = (j + 1) % 5)
             {
