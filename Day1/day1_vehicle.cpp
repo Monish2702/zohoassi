@@ -25,14 +25,17 @@ enum bikeType
 };
 const char *bicycleTypeString[] = {"scooter", "gear_bike"};
 
+//----------------------------------------------------------------------------------------------------------------------
 // Base class vehicle
 class Vehicle
 {
-public:
+protected:
     vehicleType type;
     string brand, model, color;
     int no_of_wheels;
     float mileage, price;
+
+public:
     // Base class constructor
     Vehicle(vehicleType type, string brand, string model, string color, float mileage, float price)
     {
@@ -44,10 +47,10 @@ public:
         this->price = price;
     }
     // operator overloading
-    friend bool operator<(const Vehicle &v1, const Vehicle &v2);
-    //  bool operator< (const vehicle& v1){    // overloading operator < without friend
-    //     return this->price < v1.price;
-    // }
+    // friend bool operator<(const Vehicle &v1, const Vehicle &v2);
+     bool operator< (const Vehicle& v1){    // overloading operator < without friend
+        return this->price < v1.price;
+    }
     friend ostream &operator<<(ostream &print, const Vehicle &v);
     virtual int getNoOfWheels() = 0;
 };
@@ -62,17 +65,18 @@ ostream &operator<<(ostream &print, const Vehicle &v)
     print << "Price: " << v.price << endl;
     return print;
 }
-bool operator<(const Vehicle &v1, const Vehicle &v2)
-{ // friend function to comapre prices
-    return v1.price < v2.price;
-}
+// bool operator<(const Vehicle &v1, const Vehicle &v2)
+// { // friend function to comapre prices
+//     return v1.price < v2.price;
+// }
 
 // Derived class-1 Car
 class Car : public Vehicle
 {
-public:
+private:
     int no_of_persons;
     carType car_type;
+public:
     // Derived class-1 constructor
     Car(vehicleType type, string brand, string model, string color, float mileage, float price, int no_of_persons, carType car_type) : Vehicle(type, brand, model, color, mileage, price)
     {
@@ -85,6 +89,7 @@ public:
     }
     friend ostream &operator<<(ostream &print, Car &v);
 };
+
 ostream &operator<<(ostream &print, Car &v)
 { // friend function to print bike details
     print << (Vehicle &)v;
@@ -97,10 +102,10 @@ ostream &operator<<(ostream &print, Car &v)
 // Derived class-2 Bike
 class Bike : public Vehicle
 {
-public:
+private:
     float weight;
-    // vehicleType type;
     bikeType bike_type;
+public:
     // Derived class-2 constructor
     Bike(vehicleType type, string brand, string model, string color, float mileage, float price, float weight, bikeType bike_type) : Vehicle(type, brand, model, color, mileage, price)
     {
