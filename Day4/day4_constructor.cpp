@@ -4,9 +4,10 @@ using namespace std;
 
 class rectangle
 {
-public: // private:
+// public: 
+private:
     int *left, *top, *width, *height, *area;
-    // public:
+    public:
     rectangle()
     { // default constructor initializing all the values to zero
         left = new int(0);
