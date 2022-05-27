@@ -1,0 +1,10 @@
+Enter the x (m) coordinate length: 5
+Enter the y (n) coordinate length: 5
+0 2 0 3 1
+4 1 2 0 0
+2 0 0 0 0
+0 1 0 2 3
+0 0 1 1 0
+
+The formed groups sum are: 11 4 1 7
+The leader group is: 11
