@@ -1,10 +1,7 @@
-// #include <iostream>
-// #include <fstream>
-// #include <string>
-// #include "../notepad_proto/users.pb.h"
 #include "projectPortal.cpp"
-using namespace std;
-int wrong_password_count = 0;
+
+int wrong_password_count = 0; //global variable
+
 bool validateEmail(string email)
 {
     int at = email.find('@');
@@ -27,6 +24,24 @@ bool emailExists(string email)
     while (getline(file, line))
     {
         if (line.find(email) != string::npos)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool userNameExists(string username)
+{
+    ifstream file("users", ios::in | ios::binary);
+    if (!file.is_open())
+    {
+        return false;
+    }
+    string line;
+    while (getline(file, line))
+    {
+        if (line.find(username) != string::npos)
         {
             return true;
         }
@@ -73,6 +88,7 @@ void create_maintain_session()
                         cout << endl;
                         cout << "Login successful Welcome " << user_list.users(i).name() << endl;
                         cout << user_list.users(i).id() << endl;
+                        open_project_portal(user_list.users(i).id());
                         cout << "0-Logout 1-Quit: ";
                         cin >> choice;
                         cout << "------" << endl;
@@ -95,7 +111,7 @@ void create_maintain_session()
                             return;
                         }
                         cout << "Invalid password relogin" << endl;
-                        wrong_password_count++;
+                        ++wrong_password_count;
                         return create_maintain_session();
                     }
                 }
@@ -106,6 +122,12 @@ void create_maintain_session()
         {
             cout << "Enter username: ";
             cin >> username;
+            if(userNameExists(username))
+            {
+                cout << "User name already exists. Try some other name...." << endl;
+                return create_maintain_session();
+            }
+
             cout << "Enter password: ";
             getline(cin >> ws, pwd);
             for (int i = 0; i < pwd.size(); i++)
