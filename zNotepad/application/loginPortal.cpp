@@ -1,7 +1,8 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-#include "../notepad_proto/users.pb.h"
+// #include <iostream>
+// #include <fstream>
+// #include <string>
+// #include "../notepad_proto/users.pb.h"
+#include "projectPortal.cpp"
 using namespace std;
 int wrong_password_count = 0;
 bool validateEmail(string email)
@@ -127,6 +128,7 @@ void create_maintain_session()
             file << user_list.SerializeAsString();
             file.close();
             cout << endl;
+            create_directory(username);
             cout << "User created successfully" << endl;
 
             cout << "0-Login/SignUp 1-Quit: ";
