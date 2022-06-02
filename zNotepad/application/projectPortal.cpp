@@ -118,6 +118,23 @@ void open_project_portal(int s, string uname)
                 case 1:
                 {
                     // to update any line of the file using proto content
+                    cout << "Enter the line number to update: ";
+                    int line_number;
+                    cin >> line_number;
+                    cout << "Enter the new text: ";
+                    string new_text;
+                    getline(cin>>ws, new_text);
+                    for (int i = 0; i < p.contents_size(); i++)
+                    {
+                        if (i == line_number)
+                        {
+                            p.mutable_contents(i)->set_content_line(new_text);
+                            break;
+                        }
+                    }
+                    notepad_projects::contents *pcontent = p.add_contents();
+                    pcontent->set_content_line(new_text);
+                    
                     // output_fstream.open("../application/user_projects/" + uname + "/" + filename, std::ios_base::in);
                     // output_fstream.close();
                     break;
