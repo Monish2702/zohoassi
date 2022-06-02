@@ -1,14 +1,28 @@
 syntax = "proto3";
 package notepad_versions;
 
-message changes {
-  string changes = 1;
+message change
+{
+    string change = 1;
+}
+
+message changes //each changes made 
+{
+    int32 start_line=1;
+    int32 end_line=2;
+    repeated change single_time_changes = 3;
 }   
 
-message version {
+message version 
+{
   int32 version_id = 1;
   int32 version_number = 2;
-  int32 project_id = 3;
-  string created_time = 4;
-  repeated changes changes = 5;
+  string created_time = 3;
+  repeated changes change_in_this_version = 4;
+}
+
+message version_list //various versions of a project
+{
+    int32 project_id = 1; 
+    repeated version versions = 2;
 }
