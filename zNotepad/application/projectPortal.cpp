@@ -30,7 +30,7 @@ void open_project_portal(int s, string uname)
     cin >> ch;
     switch (ch) // outer switch starts
     {
-    case 0: // if(!ch)
+    case 0:
     {
         cout << "Enter your new file name:" << endl;
         string filename;
@@ -52,6 +52,7 @@ void open_project_portal(int s, string uname)
         }
         output_fstream.close();
         cout << p.user_id() << " " << p.project_id() << " " << p.project_name() << endl;
+        return open_project_portal(s, uname);
         break;
     }
     case 1: // edit existing files
@@ -140,7 +141,7 @@ void open_project_portal(int s, string uname)
                 {
                     // to remove any line of the file
                     cout << "Enter line numbers (from and to) to remove: ";
-                    int start_line_number,end_line_number;
+                    int start_line_number, end_line_number;
                     cin >> start_line_number;
                     cin >> end_line_number;
                     for (int i = start_line_number; i <= end_line_number; i++)
