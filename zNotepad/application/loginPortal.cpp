@@ -1,6 +1,6 @@
 #include "projectPortal.cpp"
-
 int wrong_password_count = 0; // global variable
+//------------------------------------------------------------------------------------------------------
 
 bool validateEmail(string email) //to validate email
 {
@@ -12,11 +12,13 @@ bool validateEmail(string email) //to validate email
     }
     return true;
 }
+//------------------------------------------------------------------------------------------------------
 
 bool check_Captcha(string &captcha, string &user_input) //to validate captcha
 {
     return captcha.compare(user_input) == 0;
 }
+//------------------------------------------------------------------------------------------------------
 
 // function to generate CAPTCHA
 string generateCaptcha(int n)
@@ -29,6 +31,7 @@ string generateCaptcha(int n)
         captcha.push_back(required_chars[rand() % 62]);
     return captcha;
 }
+//------------------------------------------------------------------------------------------------------
 
 bool emailExists(string email) //to check if email already exists so as to prompt to login
 {
@@ -48,6 +51,7 @@ bool emailExists(string email) //to check if email already exists so as to promp
     return false;
 }
 
+//------------------------------------------------------------------------------------------------------
 bool is_user_name_available(string username) //to check username is available or already taken
 {
     ifstream file("users", ios::in | ios::binary);
@@ -66,6 +70,7 @@ bool is_user_name_available(string username) //to check username is available or
     return false;
 }
 
+//------------------------------------------------------------------------------------------------------
 //function to login/logout/signup
 void create_maintain_session()
 {
@@ -118,8 +123,7 @@ void create_maintain_session()
                         //     return create_maintain_session(); // captcha part ends
                         // } 
                         cout << endl;
-                        cout << "Login successful Welcome " << user_list.users(i).name() << endl;
-                        cout << user_list.users(i).id() << endl;
+                        cout << "Login successful Welcome " << user_list.users(i).name() <<"(" << user_list.users(i).id() << ")" << endl;
                         open_project_portal(user_list.users(i).id(),user_list.users(i).name());
                         cout << "0-Logout 1-Quit: ";
                         cin >> choice;
@@ -194,7 +198,7 @@ void create_maintain_session()
         }
     }
 }
-
+//------------------------------------------------------------------------------------------------------
 int main()
 {
     create_maintain_session();

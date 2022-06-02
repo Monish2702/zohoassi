@@ -1,16 +1,7 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <vector>
-#include <iterator>
-#include <filesystem>
-#include "../notepad_proto/users.pb.h"
-#include "../project_proto/projects.pb.h"
-//------------------------------------------------------------------------------------------------------
-
+#include "versionControl.cpp"
 using std::filesystem::directory_iterator;
-using namespace std;
 namespace fs = std::filesystem;
+
 //------------------------------------------------------------------------------------------------------
 
 void create_directory(string dir_name)
@@ -30,28 +21,29 @@ void open_project_portal(int s, string uname)
     cin >> ch;
     switch (ch) // outer switch starts
     {
-    case 0:
+    case 0: 
     {
         cout << "Enter your new file name:" << endl;
         string filename;
         cin >> filename;
         // string filename("output.txt");
-        ofstream output_fstream;
+        ofstream output_fstream,version_stream;
         output_fstream.open("../application/user_projects/" + uname + "/" + filename, std::ios_base::out);
+        version_stream.open("../application/user_projects/" + uname + "/" + filename + "_versions", std::ios_base::out);
         if (!output_fstream.is_open())
         {
             cout << "Failed to open " << filename << '\n';
         }
         else
         {
-            // file operations
+            // assiging the details of the new project
             p.set_user_id(s);
             p.set_project_id(rand());
             p.set_project_name(filename);
             output_fstream << p.SerializeAsString();
         }
         output_fstream.close();
-        cout << p.user_id() << " " << p.project_id() << " " << p.project_name() << endl;
+        // cout << p.user_id() << " " << p.project_id() << " " << p.project_name() << endl;
         return open_project_portal(s, uname);
         break;
     }
@@ -167,6 +159,10 @@ void open_project_portal(int s, string uname)
                     flag = false;
                     break;
                 }
+                }
+                for(int i = 0; i < p.contents_size(); i++)
+                {
+                    version(p.contents(i).content_line(), p.project_id());
                 }
                 // output_fstream.open("../application/user_projects/" + uname + "/" + filename, std::ios_base::out);
                 // p.SerializeToOstream(&output_fstream);
