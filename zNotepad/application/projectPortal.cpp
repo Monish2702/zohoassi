@@ -54,13 +54,13 @@ void open_project_portal(int s, string uname)
         cout << p.user_id() << " " << p.project_id() << " " << p.project_name() << endl;
         break;
     }
-    case 1: //edit existing files
+    case 1: // edit existing files
     {
         // displaying all the files that this particular user has
         string path = "../application/user_projects/" + uname + "/"; // to display the project list
         for (const auto &file : directory_iterator(path))
             cout << file.path() << endl;
-        
+
         // asking user which file to open
         cout << "Enter the file name to open: ";
         string filename;
@@ -98,12 +98,13 @@ void open_project_portal(int s, string uname)
                 case 0:
                 {
                     // get lines from user until they enter STOP serialize it and put into file
-                    string line; bool inner_flag = true;  // inner flag to break out of while loop
+                    string line;
+                    bool inner_flag = true; // inner flag to break out of while loop
                     cout << "Enter text to add to file: " << endl;
-                    while(inner_flag)
+                    while (inner_flag)
                     {
-                        
-                        getline(cin>>ws, line);
+
+                        getline(cin >> ws, line);
                         if (line == "STOP")
                         {
                             inner_flag = false;
@@ -123,31 +124,30 @@ void open_project_portal(int s, string uname)
                     cin >> line_number;
                     cout << "Enter the new text: ";
                     string new_text;
-                    getline(cin>>ws, new_text);
+                    getline(cin >> ws, new_text);
                     for (int i = 0; i < p.contents_size(); i++)
                     {
-                        if (i == line_number)
+                        if (i - 1 == line_number)
                         {
                             p.mutable_contents(i)->set_content_line(new_text);
                             break;
                         }
                     }
-                    notepad_projects::contents *pcontent = p.add_contents();
-                    pcontent->set_content_line(new_text);
-                    
-                    // output_fstream.open("../application/user_projects/" + uname + "/" + filename, std::ios_base::in);
-                    // output_fstream.close();
+                    output_fstream << p.SerializeAsString();
                     break;
                 }
                 case 2:
                 {
                     // to remove any line of the file
-                    //  cout << "Enter the line number to remove: ";
-                    //  int line_number;
-                    //  cin >> line_number;
-                    //  input_fstream.seekg(0, input_fstream.beg);
-                    // output_fstream.open("../application/user_projects/" + uname + "/" + filename, std::ios_base::app);
-                    // output_fstream.close();
+                    cout << "Enter line numbers (from and to) to remove: ";
+                    int start_line_number,end_line_number;
+                    cin >> start_line_number;
+                    cin >> end_line_number;
+                    for (int i = start_line_number; i <= end_line_number; i++)
+                    {
+                        p.mutable_contents()->DeleteSubrange(start_line_number, end_line_number);
+                    }
+                    output_fstream << p.SerializeAsString();
                     break;
                 }
                 case 3:
@@ -159,13 +159,10 @@ void open_project_portal(int s, string uname)
                     {
                         cout << i + 1 << ". " << p.contents(i).content_line() << endl;
                     }
-                    // 
                     break;
                 }
                 case 4:
                 {
-                    // close the file and exit
-                    // output_fstream.close();
                     flag = false;
                     break;
                 }
@@ -173,7 +170,6 @@ void open_project_portal(int s, string uname)
                 // output_fstream.open("../application/user_projects/" + uname + "/" + filename, std::ios_base::out);
                 // p.SerializeToOstream(&output_fstream);
                 output_fstream.close();
-                
                 input_fstream.close();
             }
         }
