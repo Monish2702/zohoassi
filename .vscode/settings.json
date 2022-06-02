@@ -51,6 +51,7 @@
         "xhash": "cpp",
         "xtree": "cpp",
         "list": "cpp",
-        "deque": "cpp"
+        "deque": "cpp",
+        "fstream": "cpp"
     }
 }

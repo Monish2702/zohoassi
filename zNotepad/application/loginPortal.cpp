@@ -1,8 +1,8 @@
 #include "projectPortal.cpp"
 
-int wrong_password_count = 0; //global variable
+int wrong_password_count = 0; // global variable
 
-bool validateEmail(string email)
+bool validateEmail(string email) //to validate email
 {
     int at = email.find('@');
     int dot = email.find('.');
@@ -13,7 +13,24 @@ bool validateEmail(string email)
     return true;
 }
 
-bool emailExists(string email)
+bool check_Captcha(string &captcha, string &user_input) //to validate captcha
+{
+    return captcha.compare(user_input) == 0;
+}
+
+// function to generate CAPTCHA
+string generateCaptcha(int n)
+{
+    time_t t;
+    srand((unsigned)time(&t));
+    const char *required_chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    string captcha = "";
+    while (n--)
+        captcha.push_back(required_chars[rand() % 62]);
+    return captcha;
+}
+
+bool emailExists(string email) //to check if email already exists so as to prompt to login
 {
     ifstream file("users", ios::in | ios::binary);
     if (!file.is_open())
@@ -31,7 +48,7 @@ bool emailExists(string email)
     return false;
 }
 
-bool userNameExists(string username)
+bool is_user_name_available(string username) //to check username is available or already taken
 {
     ifstream file("users", ios::in | ios::binary);
     if (!file.is_open())
@@ -49,9 +66,10 @@ bool userNameExists(string username)
     return false;
 }
 
+//function to login/logout/signup
 void create_maintain_session()
 {
-    int key=32;
+    int key = 32;
     notepad_users::UserList user_list;
     bool choice;
     string username, pwd, email;
@@ -85,10 +103,24 @@ void create_maintain_session()
                 {
                     if (user_list.users(i).password() == pwd) // if entered password is correct
                     {
+                        // string captcha = generateCaptcha(4); //captcha part starts
+                        // cout << "CAPTCHA: " << captcha << endl;
+                        // string user_input;
+                        // cout << "Enter the CAPTCHA: ";
+                        // cin >> user_input;
+                        // if (check_Captcha(captcha, user_input))
+                        // {
+                        //     cout << "Valid CAPTCHA" << endl;
+                        // }
+                        // else
+                        // {
+                        //     cout << "Invalid CAPTCHA" << endl;
+                        //     return create_maintain_session(); // captcha part ends
+                        // } 
                         cout << endl;
                         cout << "Login successful Welcome " << user_list.users(i).name() << endl;
                         cout << user_list.users(i).id() << endl;
-                        open_project_portal(user_list.users(i).id());
+                        open_project_portal(user_list.users(i).id(),user_list.users(i).name());
                         cout << "0-Logout 1-Quit: ";
                         cin >> choice;
                         cout << "------" << endl;
@@ -105,24 +137,19 @@ void create_maintain_session()
                     }
                     else
                     {
-                        if(wrong_password_count>2) 
-                        {
-                            cout << "Get out" << endl;
-                            return;
-                        }
                         cout << "Invalid password relogin" << endl;
-                        ++wrong_password_count;
                         return create_maintain_session();
                     }
                 }
             }
             return;
         }
+        //-------------------------------------------------------------------------------------
         else // user does not exist so ask to create a new one
         {
             cout << "Enter username: ";
             cin >> username;
-            if(userNameExists(username))
+            if (is_user_name_available(username))
             {
                 cout << "User name already exists. Try some other name...." << endl;
                 return create_maintain_session();

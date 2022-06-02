@@ -3,7 +3,7 @@ package notepad_projects;
 
 message contents
 {
-    string content = 1;
+    string content_line = 1;
 }
 message  project
 {
