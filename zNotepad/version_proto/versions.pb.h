@@ -342,6 +342,7 @@ class version final :
     kCreatedTimeFieldNumber = 3,
     kVersionIdFieldNumber = 1,
     kVersionNumberFieldNumber = 2,
+    kChangesCountFieldNumber = 5,
   };
   // repeated .notepad_versions.changes current_version = 4;
   int current_version_size() const;
@@ -393,6 +394,15 @@ class version final :
   void _internal_set_version_number(int32_t value);
   public:
 
+  // int32 changes_count = 5;
+  void clear_changes_count();
+  int32_t changes_count() const;
+  void set_changes_count(int32_t value);
+  private:
+  int32_t _internal_changes_count() const;
+  void _internal_set_changes_count(int32_t value);
+  public:
+
   // @@protoc_insertion_point(class_scope:notepad_versions.version)
  private:
   class _Internal;
@@ -405,6 +415,7 @@ class version final :
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr created_time_;
     int32_t version_id_;
     int32_t version_number_;
+    int32_t changes_count_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -771,6 +782,26 @@ inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::notepad_versions::chan
 version::current_version() const {
   // @@protoc_insertion_point(field_list:notepad_versions.version.current_version)
   return _impl_.current_version_;
+}
+
+// int32 changes_count = 5;
+inline void version::clear_changes_count() {
+  _impl_.changes_count_ = 0;
+}
+inline int32_t version::_internal_changes_count() const {
+  return _impl_.changes_count_;
+}
+inline int32_t version::changes_count() const {
+  // @@protoc_insertion_point(field_get:notepad_versions.version.changes_count)
+  return _internal_changes_count();
+}
+inline void version::_internal_set_changes_count(int32_t value) {
+  
+  _impl_.changes_count_ = value;
+}
+inline void version::set_changes_count(int32_t value) {
+  _internal_set_changes_count(value);
+  // @@protoc_insertion_point(field_set:notepad_versions.version.changes_count)
 }
 
 // -------------------------------------------------------------------

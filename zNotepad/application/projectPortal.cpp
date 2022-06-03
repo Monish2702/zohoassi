@@ -96,7 +96,6 @@ void open_project_portal(int s, string uname)
                     cout << "Enter text to add to file: " << endl;
                     while (inner_flag)
                     {
-
                         getline(cin >> ws, line);
                         if (line == "STOP")
                         {
@@ -120,7 +119,7 @@ void open_project_portal(int s, string uname)
                     getline(cin >> ws, new_text);
                     for (int i = 0; i < p.contents_size(); i++)
                     {
-                        if (i - 1 == line_number)
+                        if (i + 1 == line_number)
                         {
                             p.mutable_contents(i)->set_content_line(new_text);
                             break;
@@ -136,7 +135,7 @@ void open_project_portal(int s, string uname)
                     int start_line_number, end_line_number;
                     cin >> start_line_number;
                     cin >> end_line_number;
-                    for (int i = start_line_number; i <= end_line_number; i++)
+                    for (int i = start_line_number-1; i <= end_line_number-1; i++)
                     {
                         p.mutable_contents()->DeleteSubrange(start_line_number, end_line_number);
                     }

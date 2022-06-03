@@ -9,14 +9,13 @@
 #include "../version_proto/versions.pb.h"
 
 using namespace std;
-static int changes_count=0;
 void version(string contents, int proj_id)
 {
     notepad_versions::version_list vl;
     notepad_versions::version *v = vl.add_versions();
     if(changes_count==0)
     {
-        ++changes_count;
+        vl.set_changes_count(1);
         vl.set_project_id(proj_id);
         v->set_version_id(rand());
         v->set_version_number(1);
