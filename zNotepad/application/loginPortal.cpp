@@ -4,13 +4,8 @@ int wrong_password_count = 0; // global variable
 
 bool validateEmail(string email) //to validate email
 {
-    int at = email.find('@');
-    int dot = email.find('.');
-    if (at == -1 || dot == -1 || at > dot)
-    {
-        return false;
-    }
-    return true;
+     const regex pattern("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
+    return regex_match(email, pattern);
 }
 //------------------------------------------------------------------------------------------------------
 
@@ -25,7 +20,7 @@ string generateCaptcha(int n)
 {
     time_t t;
     srand((unsigned)time(&t));
-    const char *required_chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    const char *required_chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789";
     string captcha = "";
     while (n--)
         captcha.push_back(required_chars[rand() % 62]);

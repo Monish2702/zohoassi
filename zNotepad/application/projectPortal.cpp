@@ -29,7 +29,7 @@ void open_project_portal(int s, string uname)
         // string filename("output.txt");
         ofstream output_fstream,version_stream;
         output_fstream.open("../application/user_projects/" + uname + "/" + filename, std::ios_base::out);
-        version_stream.open("../application/user_projects/" + uname + "/" + filename + "_versions", std::ios_base::out);
+        version_stream.open("../application/user_projects/version_files/" + uname + "/" + filename + "_versions", std::ios_base::out);
         if (!output_fstream.is_open())
         {
             cout << "Failed to open " << filename << '\n';
@@ -68,7 +68,7 @@ void open_project_portal(int s, string uname)
         {
             // file operations
             p.ParseFromIstream(&input_fstream);
-            cout << p.user_id() << " " << p.project_id() << " " << p.project_name() << endl;
+            //cout << p.user_id() << " " << p.project_id() << " " << p.project_name() << endl;
         }
         ofstream output_fstream;
         output_fstream.open("../application/user_projects/" + uname + "/" + filename, std::ios_base::out);
@@ -93,11 +93,11 @@ void open_project_portal(int s, string uname)
                     // get lines from user until they enter STOP serialize it and put into file
                     string line;
                     bool inner_flag = true; // inner flag to break out of while loop
-                    cout << "Enter text to add to file: " << endl;
+                    cout << "Enter text to add to file(:wq to save and quit): " << endl;
                     while (inner_flag)
                     {
                         getline(cin >> ws, line);
-                        if (line == "STOP")
+                        if (line == ":wq")
                         {
                             inner_flag = false;
                             break;
@@ -135,10 +135,7 @@ void open_project_portal(int s, string uname)
                     int start_line_number, end_line_number;
                     cin >> start_line_number;
                     cin >> end_line_number;
-                    for (int i = start_line_number-1; i <= end_line_number-1; i++)
-                    {
-                        p.mutable_contents()->DeleteSubrange(start_line_number, end_line_number);
-                    }
+                    p.mutable_contents()->DeleteSubrange(start_line_number-1, end_line_number-start_line_number+1);
                     output_fstream << p.SerializeAsString();
                     break;
                 }
@@ -159,12 +156,7 @@ void open_project_portal(int s, string uname)
                     break;
                 }
                 }
-                for(int i = 0; i < p.contents_size(); i++)
-                {
-                    version(p.contents(i).content_line(), p.project_id());
-                }
-                // output_fstream.open("../application/user_projects/" + uname + "/" + filename, std::ios_base::out);
-                // p.SerializeToOstream(&output_fstream);
+                //version(p);
                 output_fstream.close();
                 input_fstream.close();
             }
