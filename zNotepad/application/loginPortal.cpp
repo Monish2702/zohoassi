@@ -103,20 +103,20 @@ void create_maintain_session()
                 {
                     if (user_list.users(i).password() == pwd) // if entered password is correct
                     {
-                         string captcha = generateCaptcha(4); //captcha part starts
-                         cout << "CAPTCHA: " << captcha << endl;
-                         string user_input;
-                         cout << "Enter the CAPTCHA: ";
-                         cin >> user_input;
-                         if (check_Captcha(captcha, user_input))
-                         {
-                             cout << "Valid CAPTCHA" << endl;
-                         }
-                         else
-                         {
-                             cout << "Invalid CAPTCHA" << endl;
-                             return create_maintain_session(); // captcha part ends
-                         } 
+                        //  string captcha = generateCaptcha(4); //captcha part starts
+                        //  cout << "CAPTCHA: " << captcha << endl;
+                        //  string user_input;
+                        //  cout << "Enter the CAPTCHA: ";
+                        //  cin >> user_input;
+                        //  if (check_Captcha(captcha, user_input))
+                        //  {
+                        //      cout << "Valid CAPTCHA" << endl;
+                        //  }
+                        //  else
+                        //  {
+                        //      cout << "Invalid CAPTCHA" << endl;
+                        //      return create_maintain_session(); // captcha part ends
+                        //  } 
                         cout << endl;
                         cout << "Login successful Welcome " << user_list.users(i).name() <<"(" << user_list.users(i).id() << ")" << endl;
                         open_project_portal(user_list.users(i).id(),user_list.users(i).name());

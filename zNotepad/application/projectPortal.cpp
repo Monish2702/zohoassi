@@ -15,21 +15,23 @@ void create_directory(string dir_name)
 
 void open_project_portal(int s, string uname)
 {
+    // int changes_count = 0; // for version control
+    notepad_versions::version_list v;
     notepad_projects::project p;
     bool ch;
     cout << "0-Create new file\n1-Open an existing file:" << endl;
     cin >> ch;
     switch (ch) // outer switch starts
     {
-    case 0: 
+    case 0:
     {
         cout << "Enter your new file name:" << endl;
         string filename;
         cin >> filename;
         // string filename("output.txt");
-        ofstream output_fstream,version_stream;
-        output_fstream.open("../application/user_projects/" + uname + "/" + filename, std::ios_base::out);
-        version_stream.open("../application/user_projects/version_files/" + uname + "/" + filename + "_versions", std::ios_base::out);
+        ofstream output_fstream;
+        ofstream version_stream;
+        output_fstream.open("../application/user_projects/" + uname + "/" + filename, ios_base::out);
         if (!output_fstream.is_open())
         {
             cout << "Failed to open " << filename << '\n';
@@ -43,6 +45,8 @@ void open_project_portal(int s, string uname)
             output_fstream << p.SerializeAsString();
         }
         output_fstream.close();
+        version_stream.open("../application/user_projects/version_files/" + filename + "_versions", ios_base::out);
+        version_stream.close();
         // cout << p.user_id() << " " << p.project_id() << " " << p.project_name() << endl;
         return open_project_portal(s, uname);
         break;
@@ -59,7 +63,7 @@ void open_project_portal(int s, string uname)
         string filename;
         cin >> filename;
         ifstream input_fstream;
-        input_fstream.open("../application/user_projects/" + uname + "/" + filename, std::ios_base::in);
+        input_fstream.open("../application/user_projects/" + uname + "/" + filename, ios_base::in);
         if (!input_fstream.is_open())
         {
             cout << "Failed to open " << filename << '\n';
@@ -68,10 +72,10 @@ void open_project_portal(int s, string uname)
         {
             // file operations
             p.ParseFromIstream(&input_fstream);
-            //cout << p.user_id() << " " << p.project_id() << " " << p.project_name() << endl;
+            // cout << p.user_id() << " " << p.project_id() << " " << p.project_name() << endl;
         }
         ofstream output_fstream;
-        output_fstream.open("../application/user_projects/" + uname + "/" + filename, std::ios_base::out);
+        output_fstream.open("../application/user_projects/" + uname + "/" + filename, ios_base::out | ios_base::app);
         if (!output_fstream.is_open())
         {
             cout << "Failed to open " << filename << '\n';
@@ -90,7 +94,7 @@ void open_project_portal(int s, string uname)
                 {
                 case 0:
                 {
-                    // get lines from user until they enter STOP serialize it and put into file
+                    // to get lines from user until they enter STOP serialize it and put into file
                     string line;
                     bool inner_flag = true; // inner flag to break out of while loop
                     cout << "Enter text to add to file(:wq to save and quit): " << endl;
@@ -106,6 +110,7 @@ void open_project_portal(int s, string uname)
                         pcontent->set_content_line(line);
                     }
                     output_fstream << p.SerializeAsString();
+                    save_version(filename, p,v);
                     break;
                 }
                 case 1:
@@ -126,6 +131,7 @@ void open_project_portal(int s, string uname)
                         }
                     }
                     output_fstream << p.SerializeAsString();
+                    save_version(filename, p,v);
                     break;
                 }
                 case 2:
@@ -135,12 +141,14 @@ void open_project_portal(int s, string uname)
                     int start_line_number, end_line_number;
                     cin >> start_line_number;
                     cin >> end_line_number;
-                    p.mutable_contents()->DeleteSubrange(start_line_number-1, end_line_number-start_line_number+1);
+                    p.mutable_contents()->DeleteSubrange(start_line_number - 1, end_line_number - start_line_number + 1);
                     output_fstream << p.SerializeAsString();
+                    save_version(filename, p,v);
                     break;
                 }
                 case 3:
                 {
+                    //to display the contents of the file
                     cout << "User ID: " << p.user_id() << endl
                          << "Project ID: " << p.project_id() << endl
                          << "Project Name: " << p.project_name() << endl;
@@ -156,7 +164,6 @@ void open_project_portal(int s, string uname)
                     break;
                 }
                 }
-                //version(p);
                 output_fstream.close();
                 input_fstream.close();
             }

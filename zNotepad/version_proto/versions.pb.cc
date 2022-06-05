@@ -21,26 +21,12 @@ namespace _pb = ::PROTOBUF_NAMESPACE_ID;
 namespace _pbi = _pb::internal;
 
 namespace notepad_versions {
-PROTOBUF_CONSTEXPR changes::changes(
-    ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.each_line_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_._cached_size_)*/{}} {}
-struct changesDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR changesDefaultTypeInternal()
-      : _instance(::_pbi::ConstantInitialized{}) {}
-  ~changesDefaultTypeInternal() {}
-  union {
-    changes _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 changesDefaultTypeInternal _changes_default_instance_;
 PROTOBUF_CONSTEXPR version::version(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.current_version_)*/{}
+    /*decltype(_impl_.file_content_)*/{}
   , /*decltype(_impl_.created_time_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.version_id_)*/0
   , /*decltype(_impl_.version_number_)*/0
-  , /*decltype(_impl_.changes_count_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct versionDefaultTypeInternal {
   PROTOBUF_CONSTEXPR versionDefaultTypeInternal()
@@ -53,8 +39,9 @@ struct versionDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 versionDefaultTypeInternal _version_default_instance_;
 PROTOBUF_CONSTEXPR version_list::version_list(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.versions_)*/{}
+    /*decltype(_impl_.each_version_)*/{}
   , /*decltype(_impl_.project_id_)*/0
+  , /*decltype(_impl_.changes_count_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct version_listDefaultTypeInternal {
   PROTOBUF_CONSTEXPR version_listDefaultTypeInternal()
@@ -66,18 +53,11 @@ struct version_listDefaultTypeInternal {
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 version_listDefaultTypeInternal _version_list_default_instance_;
 }  // namespace notepad_versions
-static ::_pb::Metadata file_level_metadata_versions_2eproto[3];
+static ::_pb::Metadata file_level_metadata_versions_2eproto[2];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_versions_2eproto = nullptr;
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_versions_2eproto = nullptr;
 
 const uint32_t TableStruct_versions_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::notepad_versions::changes, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::notepad_versions::changes, _impl_.each_line_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::notepad_versions::version, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -87,8 +67,7 @@ const uint32_t TableStruct_versions_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   PROTOBUF_FIELD_OFFSET(::notepad_versions::version, _impl_.version_id_),
   PROTOBUF_FIELD_OFFSET(::notepad_versions::version, _impl_.version_number_),
   PROTOBUF_FIELD_OFFSET(::notepad_versions::version, _impl_.created_time_),
-  PROTOBUF_FIELD_OFFSET(::notepad_versions::version, _impl_.current_version_),
-  PROTOBUF_FIELD_OFFSET(::notepad_versions::version, _impl_.changes_count_),
+  PROTOBUF_FIELD_OFFSET(::notepad_versions::version, _impl_.file_content_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::notepad_versions::version_list, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -96,35 +75,33 @@ const uint32_t TableStruct_versions_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::notepad_versions::version_list, _impl_.project_id_),
-  PROTOBUF_FIELD_OFFSET(::notepad_versions::version_list, _impl_.versions_),
+  PROTOBUF_FIELD_OFFSET(::notepad_versions::version_list, _impl_.each_version_),
+  PROTOBUF_FIELD_OFFSET(::notepad_versions::version_list, _impl_.changes_count_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, -1, sizeof(::notepad_versions::changes)},
-  { 7, -1, -1, sizeof(::notepad_versions::version)},
-  { 18, -1, -1, sizeof(::notepad_versions::version_list)},
+  { 0, -1, -1, sizeof(::notepad_versions::version)},
+  { 10, -1, -1, sizeof(::notepad_versions::version_list)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
-  &::notepad_versions::_changes_default_instance_._instance,
   &::notepad_versions::_version_default_instance_._instance,
   &::notepad_versions::_version_list_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_versions_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\016versions.proto\022\020notepad_versions\"\034\n\007ch"
-  "anges\022\021\n\teach_line\030\001 \001(\t\"\226\001\n\007version\022\022\n\n"
-  "version_id\030\001 \001(\005\022\026\n\016version_number\030\002 \001(\005"
-  "\022\024\n\014created_time\030\003 \001(\t\0222\n\017current_versio"
-  "n\030\004 \003(\0132\031.notepad_versions.changes\022\025\n\rch"
-  "anges_count\030\005 \001(\005\"O\n\014version_list\022\022\n\npro"
-  "ject_id\030\001 \001(\005\022+\n\010versions\030\002 \003(\0132\031.notepa"
-  "d_versions.versionb\006proto3"
+  "\n\016versions.proto\022\020notepad_versions\"a\n\007ve"
+  "rsion\022\022\n\nversion_id\030\001 \001(\005\022\026\n\016version_num"
+  "ber\030\002 \001(\005\022\024\n\014created_time\030\003 \001(\t\022\024\n\014file_"
+  "content\030\004 \003(\t\"j\n\014version_list\022\022\n\nproject"
+  "_id\030\001 \001(\005\022/\n\014each_version\030\002 \003(\0132\031.notepa"
+  "d_versions.version\022\025\n\rchanges_count\030\003 \001("
+  "\005b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_versions_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_versions_2eproto = {
-    false, false, 306, descriptor_table_protodef_versions_2eproto,
+    false, false, 249, descriptor_table_protodef_versions_2eproto,
     "versions.proto",
-    &descriptor_table_versions_2eproto_once, nullptr, 0, 3,
+    &descriptor_table_versions_2eproto_once, nullptr, 0, 2,
     schemas, file_default_instances, TableStruct_versions_2eproto::offsets,
     file_level_metadata_versions_2eproto, file_level_enum_descriptors_versions_2eproto,
     file_level_service_descriptors_versions_2eproto,
@@ -136,209 +113,6 @@ PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_versions
 // Force running AddDescriptors() at dynamic initialization time.
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_versions_2eproto(&descriptor_table_versions_2eproto);
 namespace notepad_versions {
-
-// ===================================================================
-
-class changes::_Internal {
- public:
-};
-
-changes::changes(::PROTOBUF_NAMESPACE_ID::Arena* arena,
-                         bool is_message_owned)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
-  SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:notepad_versions.changes)
-}
-changes::changes(const changes& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message() {
-  changes* const _this = this; (void)_this;
-  new (&_impl_) Impl_{
-      decltype(_impl_.each_line_){}
-    , /*decltype(_impl_._cached_size_)*/{}};
-
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _impl_.each_line_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.each_line_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_each_line().empty()) {
-    _this->_impl_.each_line_.Set(from._internal_each_line(), 
-      _this->GetArenaForAllocation());
-  }
-  // @@protoc_insertion_point(copy_constructor:notepad_versions.changes)
-}
-
-inline void changes::SharedCtor(
-    ::_pb::Arena* arena, bool is_message_owned) {
-  (void)arena;
-  (void)is_message_owned;
-  new (&_impl_) Impl_{
-      decltype(_impl_.each_line_){}
-    , /*decltype(_impl_._cached_size_)*/{}
-  };
-  _impl_.each_line_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.each_line_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-}
-
-changes::~changes() {
-  // @@protoc_insertion_point(destructor:notepad_versions.changes)
-  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
-  (void)arena;
-    return;
-  }
-  SharedDtor();
-}
-
-inline void changes::SharedDtor() {
-  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.each_line_.Destroy();
-}
-
-void changes::SetCachedSize(int size) const {
-  _impl_._cached_size_.Set(size);
-}
-
-void changes::Clear() {
-// @@protoc_insertion_point(message_clear_start:notepad_versions.changes)
-  uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  _impl_.each_line_.ClearToEmpty();
-  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
-}
-
-const char* changes::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  while (!ctx->Done(&ptr)) {
-    uint32_t tag;
-    ptr = ::_pbi::ReadTag(ptr, &tag);
-    switch (tag >> 3) {
-      // string each_line = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
-          auto str = _internal_mutable_each_line();
-          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "notepad_versions.changes.each_line"));
-        } else
-          goto handle_unusual;
-        continue;
-      default:
-        goto handle_unusual;
-    }  // switch
-  handle_unusual:
-    if ((tag == 0) || ((tag & 7) == 4)) {
-      CHK_(ptr);
-      ctx->SetLastTag(tag);
-      goto message_done;
-    }
-    ptr = UnknownFieldParse(
-        tag,
-        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
-        ptr, ctx);
-    CHK_(ptr != nullptr);
-  }  // while
-message_done:
-  return ptr;
-failure:
-  ptr = nullptr;
-  goto message_done;
-#undef CHK_
-}
-
-uint8_t* changes::_InternalSerialize(
-    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:notepad_versions.changes)
-  uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // string each_line = 1;
-  if (!this->_internal_each_line().empty()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_each_line().data(), static_cast<int>(this->_internal_each_line().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "notepad_versions.changes.each_line");
-    target = stream->WriteStringMaybeAliased(
-        1, this->_internal_each_line(), target);
-  }
-
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:notepad_versions.changes)
-  return target;
-}
-
-size_t changes::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:notepad_versions.changes)
-  size_t total_size = 0;
-
-  uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  // string each_line = 1;
-  if (!this->_internal_each_line().empty()) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_each_line());
-  }
-
-  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
-}
-
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData changes::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
-    changes::MergeImpl
-};
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*changes::GetClassData() const { return &_class_data_; }
-
-
-void changes::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
-  auto* const _this = static_cast<changes*>(&to_msg);
-  auto& from = static_cast<const changes&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:notepad_versions.changes)
-  GOOGLE_DCHECK_NE(&from, _this);
-  uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if (!from._internal_each_line().empty()) {
-    _this->_internal_set_each_line(from._internal_each_line());
-  }
-  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-}
-
-void changes::CopyFrom(const changes& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:notepad_versions.changes)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool changes::IsInitialized() const {
-  return true;
-}
-
-void changes::InternalSwap(changes* other) {
-  using std::swap;
-  auto* lhs_arena = GetArenaForAllocation();
-  auto* rhs_arena = other->GetArenaForAllocation();
-  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.each_line_, lhs_arena,
-      &other->_impl_.each_line_, rhs_arena
-  );
-}
-
-::PROTOBUF_NAMESPACE_ID::Metadata changes::GetMetadata() const {
-  return ::_pbi::AssignDescriptors(
-      &descriptor_table_versions_2eproto_getter, &descriptor_table_versions_2eproto_once,
-      file_level_metadata_versions_2eproto[0]);
-}
 
 // ===================================================================
 
@@ -356,11 +130,10 @@ version::version(const version& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   version* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.current_version_){from._impl_.current_version_}
+      decltype(_impl_.file_content_){from._impl_.file_content_}
     , decltype(_impl_.created_time_){}
     , decltype(_impl_.version_id_){}
     , decltype(_impl_.version_number_){}
-    , decltype(_impl_.changes_count_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -373,8 +146,8 @@ version::version(const version& from)
       _this->GetArenaForAllocation());
   }
   ::memcpy(&_impl_.version_id_, &from._impl_.version_id_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.changes_count_) -
-    reinterpret_cast<char*>(&_impl_.version_id_)) + sizeof(_impl_.changes_count_));
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.version_number_) -
+    reinterpret_cast<char*>(&_impl_.version_id_)) + sizeof(_impl_.version_number_));
   // @@protoc_insertion_point(copy_constructor:notepad_versions.version)
 }
 
@@ -383,11 +156,10 @@ inline void version::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.current_version_){arena}
+      decltype(_impl_.file_content_){arena}
     , decltype(_impl_.created_time_){}
     , decltype(_impl_.version_id_){0}
     , decltype(_impl_.version_number_){0}
-    , decltype(_impl_.changes_count_){0}
     , /*decltype(_impl_._cached_size_)*/{}
   };
   _impl_.created_time_.InitDefault();
@@ -407,7 +179,7 @@ version::~version() {
 
 inline void version::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.current_version_.~RepeatedPtrField();
+  _impl_.file_content_.~RepeatedPtrField();
   _impl_.created_time_.Destroy();
 }
 
@@ -421,11 +193,11 @@ void version::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.current_version_.Clear();
+  _impl_.file_content_.Clear();
   _impl_.created_time_.ClearToEmpty();
   ::memset(&_impl_.version_id_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.changes_count_) -
-      reinterpret_cast<char*>(&_impl_.version_id_)) + sizeof(_impl_.changes_count_));
+      reinterpret_cast<char*>(&_impl_.version_number_) -
+      reinterpret_cast<char*>(&_impl_.version_id_)) + sizeof(_impl_.version_number_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -461,24 +233,18 @@ const char* version::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) 
         } else
           goto handle_unusual;
         continue;
-      // repeated .notepad_versions.changes current_version = 4;
+      // repeated string file_content = 4;
       case 4:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
           ptr -= 1;
           do {
             ptr += 1;
-            ptr = ctx->ParseMessage(_internal_add_current_version(), ptr);
+            auto str = _internal_add_file_content();
+            ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
             CHK_(ptr);
+            CHK_(::_pbi::VerifyUTF8(str, "notepad_versions.version.file_content"));
             if (!ctx->DataAvailable(ptr)) break;
           } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<34>(ptr));
-        } else
-          goto handle_unusual;
-        continue;
-      // int32 changes_count = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
-          _impl_.changes_count_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
@@ -533,18 +299,14 @@ uint8_t* version::_InternalSerialize(
         3, this->_internal_created_time(), target);
   }
 
-  // repeated .notepad_versions.changes current_version = 4;
-  for (unsigned i = 0,
-      n = static_cast<unsigned>(this->_internal_current_version_size()); i < n; i++) {
-    const auto& repfield = this->_internal_current_version(i);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-        InternalWriteMessage(4, repfield, repfield.GetCachedSize(), target, stream);
-  }
-
-  // int32 changes_count = 5;
-  if (this->_internal_changes_count() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(5, this->_internal_changes_count(), target);
+  // repeated string file_content = 4;
+  for (int i = 0, n = this->_internal_file_content_size(); i < n; i++) {
+    const auto& s = this->_internal_file_content(i);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      s.data(), static_cast<int>(s.length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "notepad_versions.version.file_content");
+    target = stream->WriteString(4, s, target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -563,11 +325,12 @@ size_t version::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .notepad_versions.changes current_version = 4;
-  total_size += 1UL * this->_internal_current_version_size();
-  for (const auto& msg : this->_impl_.current_version_) {
-    total_size +=
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  // repeated string file_content = 4;
+  total_size += 1 *
+      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(_impl_.file_content_.size());
+  for (int i = 0, n = _impl_.file_content_.size(); i < n; i++) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      _impl_.file_content_.Get(i));
   }
 
   // string created_time = 3;
@@ -585,11 +348,6 @@ size_t version::ByteSizeLong() const {
   // int32 version_number = 2;
   if (this->_internal_version_number() != 0) {
     total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_version_number());
-  }
-
-  // int32 changes_count = 5;
-  if (this->_internal_changes_count() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_changes_count());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -610,7 +368,7 @@ void version::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOB
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  _this->_impl_.current_version_.MergeFrom(from._impl_.current_version_);
+  _this->_impl_.file_content_.MergeFrom(from._impl_.file_content_);
   if (!from._internal_created_time().empty()) {
     _this->_internal_set_created_time(from._internal_created_time());
   }
@@ -619,9 +377,6 @@ void version::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOB
   }
   if (from._internal_version_number() != 0) {
     _this->_internal_set_version_number(from._internal_version_number());
-  }
-  if (from._internal_changes_count() != 0) {
-    _this->_internal_set_changes_count(from._internal_changes_count());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -642,14 +397,14 @@ void version::InternalSwap(version* other) {
   auto* lhs_arena = GetArenaForAllocation();
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  _impl_.current_version_.InternalSwap(&other->_impl_.current_version_);
+  _impl_.file_content_.InternalSwap(&other->_impl_.file_content_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.created_time_, lhs_arena,
       &other->_impl_.created_time_, rhs_arena
   );
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(version, _impl_.changes_count_)
-      + sizeof(version::_impl_.changes_count_)
+      PROTOBUF_FIELD_OFFSET(version, _impl_.version_number_)
+      + sizeof(version::_impl_.version_number_)
       - PROTOBUF_FIELD_OFFSET(version, _impl_.version_id_)>(
           reinterpret_cast<char*>(&_impl_.version_id_),
           reinterpret_cast<char*>(&other->_impl_.version_id_));
@@ -658,7 +413,7 @@ void version::InternalSwap(version* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata version::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_versions_2eproto_getter, &descriptor_table_versions_2eproto_once,
-      file_level_metadata_versions_2eproto[1]);
+      file_level_metadata_versions_2eproto[0]);
 }
 
 // ===================================================================
@@ -677,12 +432,15 @@ version_list::version_list(const version_list& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   version_list* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.versions_){from._impl_.versions_}
+      decltype(_impl_.each_version_){from._impl_.each_version_}
     , decltype(_impl_.project_id_){}
+    , decltype(_impl_.changes_count_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _this->_impl_.project_id_ = from._impl_.project_id_;
+  ::memcpy(&_impl_.project_id_, &from._impl_.project_id_,
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.changes_count_) -
+    reinterpret_cast<char*>(&_impl_.project_id_)) + sizeof(_impl_.changes_count_));
   // @@protoc_insertion_point(copy_constructor:notepad_versions.version_list)
 }
 
@@ -691,8 +449,9 @@ inline void version_list::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.versions_){arena}
+      decltype(_impl_.each_version_){arena}
     , decltype(_impl_.project_id_){0}
+    , decltype(_impl_.changes_count_){0}
     , /*decltype(_impl_._cached_size_)*/{}
   };
 }
@@ -708,7 +467,7 @@ version_list::~version_list() {
 
 inline void version_list::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.versions_.~RepeatedPtrField();
+  _impl_.each_version_.~RepeatedPtrField();
 }
 
 void version_list::SetCachedSize(int size) const {
@@ -721,8 +480,10 @@ void version_list::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.versions_.Clear();
-  _impl_.project_id_ = 0;
+  _impl_.each_version_.Clear();
+  ::memset(&_impl_.project_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&_impl_.changes_count_) -
+      reinterpret_cast<char*>(&_impl_.project_id_)) + sizeof(_impl_.changes_count_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -740,16 +501,24 @@ const char* version_list::_InternalParse(const char* ptr, ::_pbi::ParseContext* 
         } else
           goto handle_unusual;
         continue;
-      // repeated .notepad_versions.version versions = 2;
+      // repeated .notepad_versions.version each_version = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
           ptr -= 1;
           do {
             ptr += 1;
-            ptr = ctx->ParseMessage(_internal_add_versions(), ptr);
+            ptr = ctx->ParseMessage(_internal_add_each_version(), ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
           } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<18>(ptr));
+        } else
+          goto handle_unusual;
+        continue;
+      // int32 changes_count = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
+          _impl_.changes_count_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
@@ -788,12 +557,18 @@ uint8_t* version_list::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_project_id(), target);
   }
 
-  // repeated .notepad_versions.version versions = 2;
+  // repeated .notepad_versions.version each_version = 2;
   for (unsigned i = 0,
-      n = static_cast<unsigned>(this->_internal_versions_size()); i < n; i++) {
-    const auto& repfield = this->_internal_versions(i);
+      n = static_cast<unsigned>(this->_internal_each_version_size()); i < n; i++) {
+    const auto& repfield = this->_internal_each_version(i);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
         InternalWriteMessage(2, repfield, repfield.GetCachedSize(), target, stream);
+  }
+
+  // int32 changes_count = 3;
+  if (this->_internal_changes_count() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(3, this->_internal_changes_count(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -812,9 +587,9 @@ size_t version_list::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .notepad_versions.version versions = 2;
-  total_size += 1UL * this->_internal_versions_size();
-  for (const auto& msg : this->_impl_.versions_) {
+  // repeated .notepad_versions.version each_version = 2;
+  total_size += 1UL * this->_internal_each_version_size();
+  for (const auto& msg : this->_impl_.each_version_) {
     total_size +=
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
@@ -822,6 +597,11 @@ size_t version_list::ByteSizeLong() const {
   // int32 project_id = 1;
   if (this->_internal_project_id() != 0) {
     total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_project_id());
+  }
+
+  // int32 changes_count = 3;
+  if (this->_internal_changes_count() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_changes_count());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -842,9 +622,12 @@ void version_list::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::P
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  _this->_impl_.versions_.MergeFrom(from._impl_.versions_);
+  _this->_impl_.each_version_.MergeFrom(from._impl_.each_version_);
   if (from._internal_project_id() != 0) {
     _this->_internal_set_project_id(from._internal_project_id());
+  }
+  if (from._internal_changes_count() != 0) {
+    _this->_internal_set_changes_count(from._internal_changes_count());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -863,23 +646,24 @@ bool version_list::IsInitialized() const {
 void version_list::InternalSwap(version_list* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  _impl_.versions_.InternalSwap(&other->_impl_.versions_);
-  swap(_impl_.project_id_, other->_impl_.project_id_);
+  _impl_.each_version_.InternalSwap(&other->_impl_.each_version_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(version_list, _impl_.changes_count_)
+      + sizeof(version_list::_impl_.changes_count_)
+      - PROTOBUF_FIELD_OFFSET(version_list, _impl_.project_id_)>(
+          reinterpret_cast<char*>(&_impl_.project_id_),
+          reinterpret_cast<char*>(&other->_impl_.project_id_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata version_list::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_versions_2eproto_getter, &descriptor_table_versions_2eproto_once,
-      file_level_metadata_versions_2eproto[2]);
+      file_level_metadata_versions_2eproto[1]);
 }
 
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace notepad_versions
 PROTOBUF_NAMESPACE_OPEN
-template<> PROTOBUF_NOINLINE ::notepad_versions::changes*
-Arena::CreateMaybeMessage< ::notepad_versions::changes >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::notepad_versions::changes >(arena);
-}
 template<> PROTOBUF_NOINLINE ::notepad_versions::version*
 Arena::CreateMaybeMessage< ::notepad_versions::version >(Arena* arena) {
   return Arena::CreateMessageInternal< ::notepad_versions::version >(arena);
