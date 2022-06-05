@@ -40,6 +40,7 @@ PROTOBUF_CONSTEXPR project::project(
   , /*decltype(_impl_.project_name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.project_id_)*/0
   , /*decltype(_impl_.user_id_)*/0
+  , /*decltype(_impl_.changes_count_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct projectDefaultTypeInternal {
   PROTOBUF_CONSTEXPR projectDefaultTypeInternal()
@@ -73,6 +74,7 @@ const uint32_t TableStruct_projects_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   PROTOBUF_FIELD_OFFSET(::notepad_projects::project, _impl_.user_id_),
   PROTOBUF_FIELD_OFFSET(::notepad_projects::project, _impl_.project_name_),
   PROTOBUF_FIELD_OFFSET(::notepad_projects::project, _impl_.contents_),
+  PROTOBUF_FIELD_OFFSET(::notepad_projects::project, _impl_.changes_count_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::notepad_projects::contents)},
@@ -86,14 +88,15 @@ static const ::_pb::Message* const file_default_instances[] = {
 
 const char descriptor_table_protodef_projects_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\016projects.proto\022\020notepad_projects\" \n\010co"
-  "ntents\022\024\n\014content_line\030\001 \001(\t\"r\n\007project\022"
-  "\022\n\nproject_id\030\001 \001(\005\022\017\n\007user_id\030\002 \001(\005\022\024\n\014"
-  "project_name\030\003 \001(\t\022,\n\010contents\030\004 \003(\0132\032.n"
-  "otepad_projects.contentsb\006proto3"
+  "ntents\022\024\n\014content_line\030\001 \001(\t\"\211\001\n\007project"
+  "\022\022\n\nproject_id\030\001 \001(\005\022\017\n\007user_id\030\002 \001(\005\022\024\n"
+  "\014project_name\030\003 \001(\t\022,\n\010contents\030\004 \003(\0132\032."
+  "notepad_projects.contents\022\025\n\rchanges_cou"
+  "nt\030\005 \001(\005b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_projects_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_projects_2eproto = {
-    false, false, 192, descriptor_table_protodef_projects_2eproto,
+    false, false, 216, descriptor_table_protodef_projects_2eproto,
     "projects.proto",
     &descriptor_table_projects_2eproto_once, nullptr, 0, 2,
     schemas, file_default_instances, TableStruct_projects_2eproto::offsets,
@@ -331,6 +334,7 @@ project::project(const project& from)
     , decltype(_impl_.project_name_){}
     , decltype(_impl_.project_id_){}
     , decltype(_impl_.user_id_){}
+    , decltype(_impl_.changes_count_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -343,8 +347,8 @@ project::project(const project& from)
       _this->GetArenaForAllocation());
   }
   ::memcpy(&_impl_.project_id_, &from._impl_.project_id_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.user_id_) -
-    reinterpret_cast<char*>(&_impl_.project_id_)) + sizeof(_impl_.user_id_));
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.changes_count_) -
+    reinterpret_cast<char*>(&_impl_.project_id_)) + sizeof(_impl_.changes_count_));
   // @@protoc_insertion_point(copy_constructor:notepad_projects.project)
 }
 
@@ -357,6 +361,7 @@ inline void project::SharedCtor(
     , decltype(_impl_.project_name_){}
     , decltype(_impl_.project_id_){0}
     , decltype(_impl_.user_id_){0}
+    , decltype(_impl_.changes_count_){0}
     , /*decltype(_impl_._cached_size_)*/{}
   };
   _impl_.project_name_.InitDefault();
@@ -393,8 +398,8 @@ void project::Clear() {
   _impl_.contents_.Clear();
   _impl_.project_name_.ClearToEmpty();
   ::memset(&_impl_.project_id_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.user_id_) -
-      reinterpret_cast<char*>(&_impl_.project_id_)) + sizeof(_impl_.user_id_));
+      reinterpret_cast<char*>(&_impl_.changes_count_) -
+      reinterpret_cast<char*>(&_impl_.project_id_)) + sizeof(_impl_.changes_count_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -440,6 +445,14 @@ const char* project::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) 
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
           } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<34>(ptr));
+        } else
+          goto handle_unusual;
+        continue;
+      // int32 changes_count = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
+          _impl_.changes_count_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
@@ -502,6 +515,12 @@ uint8_t* project::_InternalSerialize(
         InternalWriteMessage(4, repfield, repfield.GetCachedSize(), target, stream);
   }
 
+  // int32 changes_count = 5;
+  if (this->_internal_changes_count() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(5, this->_internal_changes_count(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -542,6 +561,11 @@ size_t project::ByteSizeLong() const {
     total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_user_id());
   }
 
+  // int32 changes_count = 5;
+  if (this->_internal_changes_count() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_changes_count());
+  }
+
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
@@ -570,6 +594,9 @@ void project::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOB
   if (from._internal_user_id() != 0) {
     _this->_internal_set_user_id(from._internal_user_id());
   }
+  if (from._internal_changes_count() != 0) {
+    _this->_internal_set_changes_count(from._internal_changes_count());
+  }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
@@ -595,8 +622,8 @@ void project::InternalSwap(project* other) {
       &other->_impl_.project_name_, rhs_arena
   );
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(project, _impl_.user_id_)
-      + sizeof(project::_impl_.user_id_)
+      PROTOBUF_FIELD_OFFSET(project, _impl_.changes_count_)
+      + sizeof(project::_impl_.changes_count_)
       - PROTOBUF_FIELD_OFFSET(project, _impl_.project_id_)>(
           reinterpret_cast<char*>(&_impl_.project_id_),
           reinterpret_cast<char*>(&other->_impl_.project_id_));

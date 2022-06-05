@@ -384,7 +384,6 @@ class version_list final :
   enum : int {
     kEachVersionFieldNumber = 2,
     kProjectIdFieldNumber = 1,
-    kChangesCountFieldNumber = 3,
   };
   // repeated .notepad_versions.version each_version = 2;
   int each_version_size() const;
@@ -413,15 +412,6 @@ class version_list final :
   void _internal_set_project_id(int32_t value);
   public:
 
-  // int32 changes_count = 3;
-  void clear_changes_count();
-  int32_t changes_count() const;
-  void set_changes_count(int32_t value);
-  private:
-  int32_t _internal_changes_count() const;
-  void _internal_set_changes_count(int32_t value);
-  public:
-
   // @@protoc_insertion_point(class_scope:notepad_versions.version_list)
  private:
   class _Internal;
@@ -432,7 +422,6 @@ class version_list final :
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::notepad_versions::version > each_version_;
     int32_t project_id_;
-    int32_t changes_count_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -676,26 +665,6 @@ inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::notepad_versions::vers
 version_list::each_version() const {
   // @@protoc_insertion_point(field_list:notepad_versions.version_list.each_version)
   return _impl_.each_version_;
-}
-
-// int32 changes_count = 3;
-inline void version_list::clear_changes_count() {
-  _impl_.changes_count_ = 0;
-}
-inline int32_t version_list::_internal_changes_count() const {
-  return _impl_.changes_count_;
-}
-inline int32_t version_list::changes_count() const {
-  // @@protoc_insertion_point(field_get:notepad_versions.version_list.changes_count)
-  return _internal_changes_count();
-}
-inline void version_list::_internal_set_changes_count(int32_t value) {
-  
-  _impl_.changes_count_ = value;
-}
-inline void version_list::set_changes_count(int32_t value) {
-  _internal_set_changes_count(value);
-  // @@protoc_insertion_point(field_set:notepad_versions.version_list.changes_count)
 }
 
 #ifdef __GNUC__

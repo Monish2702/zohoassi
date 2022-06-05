@@ -41,7 +41,6 @@ PROTOBUF_CONSTEXPR version_list::version_list(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.each_version_)*/{}
   , /*decltype(_impl_.project_id_)*/0
-  , /*decltype(_impl_.changes_count_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct version_listDefaultTypeInternal {
   PROTOBUF_CONSTEXPR version_listDefaultTypeInternal()
@@ -76,7 +75,6 @@ const uint32_t TableStruct_versions_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::notepad_versions::version_list, _impl_.project_id_),
   PROTOBUF_FIELD_OFFSET(::notepad_versions::version_list, _impl_.each_version_),
-  PROTOBUF_FIELD_OFFSET(::notepad_versions::version_list, _impl_.changes_count_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::notepad_versions::version)},
@@ -92,14 +90,13 @@ const char descriptor_table_protodef_versions_2eproto[] PROTOBUF_SECTION_VARIABL
   "\n\016versions.proto\022\020notepad_versions\"a\n\007ve"
   "rsion\022\022\n\nversion_id\030\001 \001(\005\022\026\n\016version_num"
   "ber\030\002 \001(\005\022\024\n\014created_time\030\003 \001(\t\022\024\n\014file_"
-  "content\030\004 \003(\t\"j\n\014version_list\022\022\n\nproject"
+  "content\030\004 \003(\t\"S\n\014version_list\022\022\n\nproject"
   "_id\030\001 \001(\005\022/\n\014each_version\030\002 \003(\0132\031.notepa"
-  "d_versions.version\022\025\n\rchanges_count\030\003 \001("
-  "\005b\006proto3"
+  "d_versions.versionb\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_versions_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_versions_2eproto = {
-    false, false, 249, descriptor_table_protodef_versions_2eproto,
+    false, false, 226, descriptor_table_protodef_versions_2eproto,
     "versions.proto",
     &descriptor_table_versions_2eproto_once, nullptr, 0, 2,
     schemas, file_default_instances, TableStruct_versions_2eproto::offsets,
@@ -434,13 +431,10 @@ version_list::version_list(const version_list& from)
   new (&_impl_) Impl_{
       decltype(_impl_.each_version_){from._impl_.each_version_}
     , decltype(_impl_.project_id_){}
-    , decltype(_impl_.changes_count_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  ::memcpy(&_impl_.project_id_, &from._impl_.project_id_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.changes_count_) -
-    reinterpret_cast<char*>(&_impl_.project_id_)) + sizeof(_impl_.changes_count_));
+  _this->_impl_.project_id_ = from._impl_.project_id_;
   // @@protoc_insertion_point(copy_constructor:notepad_versions.version_list)
 }
 
@@ -451,7 +445,6 @@ inline void version_list::SharedCtor(
   new (&_impl_) Impl_{
       decltype(_impl_.each_version_){arena}
     , decltype(_impl_.project_id_){0}
-    , decltype(_impl_.changes_count_){0}
     , /*decltype(_impl_._cached_size_)*/{}
   };
 }
@@ -481,9 +474,7 @@ void version_list::Clear() {
   (void) cached_has_bits;
 
   _impl_.each_version_.Clear();
-  ::memset(&_impl_.project_id_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.changes_count_) -
-      reinterpret_cast<char*>(&_impl_.project_id_)) + sizeof(_impl_.changes_count_));
+  _impl_.project_id_ = 0;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -511,14 +502,6 @@ const char* version_list::_InternalParse(const char* ptr, ::_pbi::ParseContext* 
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
           } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<18>(ptr));
-        } else
-          goto handle_unusual;
-        continue;
-      // int32 changes_count = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
-          _impl_.changes_count_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
@@ -565,12 +548,6 @@ uint8_t* version_list::_InternalSerialize(
         InternalWriteMessage(2, repfield, repfield.GetCachedSize(), target, stream);
   }
 
-  // int32 changes_count = 3;
-  if (this->_internal_changes_count() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(3, this->_internal_changes_count(), target);
-  }
-
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -599,11 +576,6 @@ size_t version_list::ByteSizeLong() const {
     total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_project_id());
   }
 
-  // int32 changes_count = 3;
-  if (this->_internal_changes_count() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_changes_count());
-  }
-
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
@@ -626,9 +598,6 @@ void version_list::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::P
   if (from._internal_project_id() != 0) {
     _this->_internal_set_project_id(from._internal_project_id());
   }
-  if (from._internal_changes_count() != 0) {
-    _this->_internal_set_changes_count(from._internal_changes_count());
-  }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
@@ -647,12 +616,7 @@ void version_list::InternalSwap(version_list* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   _impl_.each_version_.InternalSwap(&other->_impl_.each_version_);
-  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(version_list, _impl_.changes_count_)
-      + sizeof(version_list::_impl_.changes_count_)
-      - PROTOBUF_FIELD_OFFSET(version_list, _impl_.project_id_)>(
-          reinterpret_cast<char*>(&_impl_.project_id_),
-          reinterpret_cast<char*>(&other->_impl_.project_id_));
+  swap(_impl_.project_id_, other->_impl_.project_id_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata version_list::GetMetadata() const {

@@ -31,7 +31,7 @@ void open_project_portal(int s, string uname)
         // string filename("output.txt");
         ofstream output_fstream;
         ofstream version_stream;
-        output_fstream.open("../application/user_projects/" + uname + "/" + filename, ios_base::out);
+        output_fstream.open("../application/user_projects/" + uname + "/" + filename);
         if (!output_fstream.is_open())
         {
             cout << "Failed to open " << filename << '\n';
@@ -45,7 +45,7 @@ void open_project_portal(int s, string uname)
             output_fstream << p.SerializeAsString();
         }
         output_fstream.close();
-        version_stream.open("../application/user_projects/version_files/" + filename + "_versions", ios_base::out);
+        version_stream.open("../application/user_projects/version_files/" + filename + "_versions");
         version_stream.close();
         // cout << p.user_id() << " " << p.project_id() << " " << p.project_name() << endl;
         return open_project_portal(s, uname);

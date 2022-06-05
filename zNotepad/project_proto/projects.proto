@@ -11,4 +11,5 @@ message  project
     int32 user_id = 2;
     string project_name = 3;
     repeated contents contents = 4;
+    int32 changes_count = 5;
 }

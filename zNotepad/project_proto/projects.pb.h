@@ -338,6 +338,7 @@ class project final :
     kProjectNameFieldNumber = 3,
     kProjectIdFieldNumber = 1,
     kUserIdFieldNumber = 2,
+    kChangesCountFieldNumber = 5,
   };
   // repeated .notepad_projects.contents contents = 4;
   int contents_size() const;
@@ -389,6 +390,15 @@ class project final :
   void _internal_set_user_id(int32_t value);
   public:
 
+  // int32 changes_count = 5;
+  void clear_changes_count();
+  int32_t changes_count() const;
+  void set_changes_count(int32_t value);
+  private:
+  int32_t _internal_changes_count() const;
+  void _internal_set_changes_count(int32_t value);
+  public:
+
   // @@protoc_insertion_point(class_scope:notepad_projects.project)
  private:
   class _Internal;
@@ -401,6 +411,7 @@ class project final :
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr project_name_;
     int32_t project_id_;
     int32_t user_id_;
+    int32_t changes_count_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -599,6 +610,26 @@ inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::notepad_projects::cont
 project::contents() const {
   // @@protoc_insertion_point(field_list:notepad_projects.project.contents)
   return _impl_.contents_;
+}
+
+// int32 changes_count = 5;
+inline void project::clear_changes_count() {
+  _impl_.changes_count_ = 0;
+}
+inline int32_t project::_internal_changes_count() const {
+  return _impl_.changes_count_;
+}
+inline int32_t project::changes_count() const {
+  // @@protoc_insertion_point(field_get:notepad_projects.project.changes_count)
+  return _internal_changes_count();
+}
+inline void project::_internal_set_changes_count(int32_t value) {
+  
+  _impl_.changes_count_ = value;
+}
+inline void project::set_changes_count(int32_t value) {
+  _internal_set_changes_count(value);
+  // @@protoc_insertion_point(field_set:notepad_projects.project.changes_count)
 }
 
 #ifdef __GNUC__
